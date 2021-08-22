@@ -1,5 +1,6 @@
 package com.example.Phase12;
 
+import com.example.Phase12.service.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -20,8 +21,10 @@ import java.util.Optional;
     private String name;
     @Column(name = "dateOfBirth")
     private String dateOfBirth;
-    @Column(name = "gender")
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     @Column(name = "graduationDate")
     private String graduationDate;
 
@@ -73,7 +76,7 @@ import java.util.Optional;
 
     }
 
-    public Employee(String name, String gender) {
+    public Employee(String name, Gender gender) {
         this.name = name;
 
         this.gender = gender;
@@ -106,11 +109,11 @@ import java.util.Optional;
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender(String male) {
-        return gender;
+    public Gender getGender() {
+        return this.gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -153,13 +156,6 @@ import java.util.Optional;
     public void setListOfEmployees(List<Employee> listOfEmployees) {
         this.listOfEmployees = listOfEmployees;
     }
-//    public Employee getManager() {
-//        return manager;
-//    }
-//
-//    public void setManager(Employee manager) {
-//        this.manager = manager;
-//    }
 
     public Float getNetSalary() {
         return netSalary;
@@ -169,9 +165,7 @@ import java.util.Optional;
         this.netSalary = netSalary;
     }
 
-    public String getGender() {
-        return gender;
-    }
+
 
     public Team getTeam() {
         return team;

@@ -2,6 +2,7 @@ package com.example.Phase12;
 
 import com.example.Phase12.service.DepartmentService;
 import com.example.Phase12.service.EmployeeService;
+import com.example.Phase12.service.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,7 +34,7 @@ public class ServiceTest {
 
         Employee x = new Employee();
 //        x.getDepartment(13);
-        x.setGender("Male");
+        x.setGender(Gender.Female);
         x.setName("ahmed");
 //        x.setDateOfBirth(45/67/2000);
 //        x.setGraduationDate(2000);

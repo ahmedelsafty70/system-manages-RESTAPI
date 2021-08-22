@@ -3,6 +3,7 @@ package com.example.Phase12;
 import com.example.Phase12.Repository.EmployeeRepository;
 import com.example.Phase12.Repository.TeamRepository;
 import com.example.Phase12.service.EmployeeService;
+import com.example.Phase12.service.Gender;
 import com.example.Phase12.service.TeamService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class ControllerTest {
 
         Employee safty = new Employee();
         Optional<Team> team = teamRepository.findById(1);
-        safty.setGender("female");
-        safty.setName("Mona");
+        safty.setGender(Gender.Female);
+        safty.setName("sasao");
         safty.setNetSalary(1000.65F);
         safty.setGrossSalary(employeeService.CalculateGrossSalary(safty.getNetSalary()));
         safty.setGraduationDate("2023,10,15");
