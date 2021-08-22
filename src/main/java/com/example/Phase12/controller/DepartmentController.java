@@ -19,8 +19,8 @@ public class DepartmentController {
     private DepartmentService departmentService;
     
     @RequestMapping(value = "/adding")
-    public void savingDepartment(@RequestBody Department department){
-        departmentService.savingDepartment(department);
+    public Department savingDepartment(@RequestBody Department department){
+        return departmentService.savingDepartment(department);
     }
 
     @RequestMapping(value = "/GetDep" )

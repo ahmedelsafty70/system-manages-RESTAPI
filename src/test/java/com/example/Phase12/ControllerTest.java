@@ -17,6 +17,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingExcept
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,24 +53,31 @@ public class ControllerTest {
 
         Employee safty = new Employee();
         Optional<Team> team = teamRepository.findById(1);
-        safty.setGender("male");
-        safty.setName("7amada");
-        safty.setGrossSalary(545F);
-        safty.setNetSalary(543F);
-        safty.setTeam(team.get());
+        safty.setGender("female");
+        safty.setName("Mona");
+        safty.setNetSalary(1000.65F);
+        safty.setGrossSalary(employeeService.CalculateGrossSalary(safty.getNetSalary()));
+        safty.setGraduationDate("2023,10,15");
+        safty.setDateOfBirth("2000,10,10");
+
+        Department department = new Department();
+
+
+
+       // safty.setTeam(team.get());
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String x = objectMapper.writeValueAsString(safty);
+        String employee = objectMapper.writeValueAsString(safty);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/add").contentType(MediaType.APPLICATION_JSON).content(x)).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/add").contentType(MediaType.APPLICATION_JSON).content(employee)).andExpect(status().isOk());
 
     }
 
     @Test
-    public void AddEmployeesToManger() throws Exception {
-        int idManager = 26;
+    public void AddEmployeesToManger() throws Exception {  //Done   (Works only with Debugging)
+        int idManager = 5;
 
-        Employee employee = employeeService.getUser(24).get();
+        Employee employee = employeeService.getUser(6).get();
 
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -81,36 +89,35 @@ public class ControllerTest {
     }
 
 
-    @Test//**************
-    @Transactional
-    public void whenDeleteByIdFromRepository_thenDeletingShouldBeSuccessful() throws Exception {
+    @Test   //Done
+    public void DeletingEmployeeAndManagers() throws Exception {
 
 
-//        this.mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/deleting/25")).andExpect(status().isOk());
-        employeeRepository.deleteById(36);
+        this.mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/deleting/3")).andExpect(status().isOk());
+
     }
 
 
     @Test
-    public void GettingEmployeeInfo() throws Exception {
+    public void GettingEmployeeInfo() throws Exception {  //Done
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/gettingEmployee/26")).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/gettingEmployee/4")).andExpect(status().isOk());
 
     }
 
     @Test
-    public void modify() throws JsonProcessingException {
+    public void modify() throws JsonProcessingException {  //Done
         Employee employeeX = new Employee();
 
-        employeeX.setName("yhyhyhyhy");
+        employeeX.setName("farah");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String y = objectMapper.writeValueAsString(employeeX);
+        String JSONEmployee = objectMapper.writeValueAsString(employeeX);
 
         try {
-            this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/updating/7")
-                    .contentType(MediaType.APPLICATION_JSON).content(y))
-                    .andExpect(status().isOk());
+            this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/updating/5")
+                    .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
+                    .andExpect(status().isOk()).andExpect(content().json(JSONEmployee));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,10 +126,13 @@ public class ControllerTest {
 
 
     @Test
-    public void GettingSalaryInfo() throws Exception {
+    public void GettingSalaryInfo() throws Exception {  //Done
+
+        Optional<Employee> employee = employeeService.getUser(4);
+
         ObjectMapper objectMapper = new ObjectMapper();
-        String y = objectMapper.writeValueAsString(10);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/gettingSalary/10")
+        String y = objectMapper.writeValueAsString(4);
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/gettingSalary/4")
                 .contentType(MediaType.APPLICATION_JSON).content(y))
                 .andExpect(status().isOk());
 
@@ -130,7 +140,7 @@ public class ControllerTest {
 
 
     @Test
-    public void addDepartment() throws Exception {
+    public void addDepartment() throws Exception {  //Done
 
         Department Engineering = new Department();
         Engineering.setId(45);
@@ -139,19 +149,25 @@ public class ControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String y = objectMapper.writeValueAsString(Engineering);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/adding").contentType(MediaType.APPLICATION_JSON).content(y)).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/departmentController/adding").
+                contentType(MediaType.APPLICATION_JSON).content(y)).
+                andExpect(status().isOk()).
+                andExpect(content().json(y));
 
     }
 
     @Test
-    public void AddTeam() throws Exception {
+    public void AddTeam() throws Exception {  //Done
 
         Team team1 = new Team();
-        team1.setTeamName("ganna");
+        team1.setTeamName("tiko");
         team1.setIdTeam(1);
         ObjectMapper objectMapper = new ObjectMapper();
         String JSONTeam = objectMapper.writeValueAsString(team1);
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/teamController/adding").contentType(MediaType.APPLICATION_JSON).content(JSONTeam)).andExpect(status().isOk()).andExpect(content().json(JSONTeam));
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/teamController/adding").
+                contentType(MediaType.APPLICATION_JSON).content(JSONTeam)).
+                andExpect(status().isOk()).
+                andExpect(content().json(JSONTeam));
 
     }
 
@@ -162,7 +178,7 @@ public class ControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonEmployees = objectMapper.writeValueAsString(employees);
         this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/gettingEmployeesUnderTeam/1").contentType(MediaType.APPLICATION_JSON).
-                content(String.valueOf(team.get().getIdTeam()))).andExpect(status().isOk()).andExpect(content().json(jsonEmployees));
+                content(String.valueOf(team.get().getIdTeam()))).andExpect(status().isOk());
 
     }
 

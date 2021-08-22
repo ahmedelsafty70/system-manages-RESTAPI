@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 @RequestMapping(value="/HumanResources")
 public class EmployeeController {
@@ -36,15 +38,15 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/submittingUser/{id}")
-    public void addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException{
+    public Employee addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException{
 
-        employeeService.puttingEmployeesUnderneathManger(employee,id);
+        return employeeService.puttingEmployeesUnderneathManger(employee,id);
 
     }
     @PutMapping(value = {"/updating/{id}"})
-    public void setEmployeeService(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException {
+    public Employee setEmployeeService(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException {
 
-        employeeService.modifyUser(employee);
+       return employeeService.modifyUser(employee,parseInt(id));
 
     }
 
@@ -56,8 +58,9 @@ public class EmployeeController {
         if(employee.get().getManager() != null  && employee.get().getListOfEmployees() != null)
         {
             employeeService.ReplacingEmployeesToAnotherManager(employee);
-        }
             employeeService.deleteEmployee(id);
+        }
+
 
     }
 

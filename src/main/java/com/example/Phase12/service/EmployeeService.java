@@ -31,25 +31,34 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public void modifyUser(Employee employeeModifiedData) throws NotFoundException {
-        Employee empToModify = getUser(employeeModifiedData.getIdEmployee()).isPresent() ? getUser(employeeModifiedData.getIdEmployee()).get() : null;
-        Employee x = new Employee(employeeModifiedData,empToModify);
-        savingEmployee(x);
+    public Employee modifyUser(Employee employeeModifiedData , Integer id) throws NotFoundException {
+       //
+        // Employee empToModify = getUser(employeeModifiedData.getIdEmployee()).isPresent() ? getUser(employeeModifiedData.getIdEmployee()).get() : null;
+        Employee finalModifiedOnEmployee;
+        Optional<Employee> empToModify = getUser(id);
+        Employee employeeWantedToBeChange = getUser(empToModify.get().getIdEmployee()).isPresent() ? getUser(empToModify.get().getIdEmployee()).get() : null;
+        if(employeeWantedToBeChange == null)
+            return null;
+        else  {
+          finalModifiedOnEmployee = new Employee(employeeModifiedData,empToModify);
+          savingEmployee(finalModifiedOnEmployee);}
 
+        return employeeModifiedData;
     }
 
-    public void puttingEmployeesUnderneathManger(Employee employee , String id) throws NotFoundException {
+    public Employee puttingEmployeesUnderneathManger(Employee employee , String id) throws NotFoundException {
 
         Optional<Employee> manager = getUser(parseInt(id));
         employee.setManager(manager.get());
         savingEmployee(employee);
+        return employee;
     }
 
     public void deleteEmployee(int id){
 
 
-//        employeeRepository.deleteById(id);
-        employeeRepository.delete(employeeRepository.getById(id));
+        employeeRepository.deleteById(id);
+       // employeeRepository.delete(employeeRepository.getById(id));
     }
 
     public EmployeeDEO gettingSalaries(int id) throws NotFoundException {
@@ -85,6 +94,12 @@ public class EmployeeService {
     public List<Employee> getEmployeesUnderManagerRecursively(int id)
     {
         return employeeRepository.getEmployeesUnderManagerRecursively(id);
+    }
+
+    public Float CalculateGrossSalary(Float netSalary) {
+        double grossSalary = netSalary - (netSalary * 0.15) - 500;
+        float grossSalaryFloat = (float)grossSalary;
+        return grossSalaryFloat;
     }
 }
 

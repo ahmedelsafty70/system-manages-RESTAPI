@@ -3,9 +3,10 @@ package com.example.Phase12;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "employee")
@@ -18,11 +19,11 @@ import java.util.List;
     @Column(name = "name")
     private String name;
     @Column(name = "dateOfBirth")
-    private Date dateOfBirth;
+    private String dateOfBirth;
     @Column(name = "gender")
     private String gender;
     @Column(name = "graduationDate")
-    private Date graduationDate;
+    private String graduationDate;
 
 
     @Column(name = "netSalary")
@@ -50,21 +51,21 @@ import java.util.List;
 
 
 
-    public Employee(Employee source, Employee destination){
+    public Employee(Employee source, Optional<Employee> destination){
         if(source.name != null)
-            destination.setName(source.getName());
+            destination.get().setName(source.getName());
         if(source.dateOfBirth != null)
-            destination.setDateOfBirth(source.getDateOfBirth());
+            destination.get().setDateOfBirth(source.getDateOfBirth());
         if (source.gender != null)
-            destination.setDateOfBirth(source.getDateOfBirth());
+            destination.get().setDateOfBirth(source.getDateOfBirth());
         if(source.graduationDate != null)
-            destination.setGraduationDate(source.getGraduationDate());
+            destination.get().setGraduationDate(source.getGraduationDate());
         if(source.department != null)
-            destination.setDepartment(source.getDepartment());
+            destination.get().setDepartment(source.getDepartment());
 //        if(source.manager != null)
 //            destination.setManager(source.getManager());
         if(source.grossSalary != null)
-            destination.setGrossSalary(source.getGrossSalary());
+            destination.get().setGrossSalary(source.getGrossSalary());
     }
 
 
@@ -97,11 +98,11 @@ import java.util.List;
         this.idEmployee = idEmployee;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -113,11 +114,11 @@ import java.util.List;
         this.gender = gender;
     }
 
-    public Date getGraduationDate() {
+    public String getGraduationDate() {
         return graduationDate;
     }
 
-    public void setGraduationDate(Date graduationDate) {
+    public void setGraduationDate(String graduationDate) {
         this.graduationDate = graduationDate;
     }
 
@@ -179,4 +180,6 @@ import java.util.List;
     public void setTeam(Team team) {
         this.team = team;
     }
+
+
 }

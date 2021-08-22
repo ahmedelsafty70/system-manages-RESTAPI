@@ -28,4 +28,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
            ")\n" +
            "select * from cte;", nativeQuery = true)
     List<Employee> getEmployeesUnderManagerRecursively(int id);
+
+
+
+    @Query("DELETE from Employee  where idEmployee =?1")
+    @Modifying()
+    void deleteById(Integer id);
 }
