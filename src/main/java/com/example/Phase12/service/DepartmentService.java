@@ -1,7 +1,7 @@
 package com.example.Phase12.service;
 
 import com.example.Phase12.Department;
-import com.example.Phase12.Repository.departmentRepository;
+import com.example.Phase12.Repository.DepartmentRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.Optional;
 public class DepartmentService {
 
     @Autowired
-    public departmentRepository departmentRepository;
+    public DepartmentRepository departmentRepository;
 
     public Department savingDepartment(Department department){
         return departmentRepository.save(department);

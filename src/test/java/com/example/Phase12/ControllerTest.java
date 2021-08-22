@@ -63,9 +63,6 @@ public class ControllerTest {
         Department department = new Department();
 
 
-
-       // safty.setTeam(team.get());
-
         ObjectMapper objectMapper = new ObjectMapper();
         String employee = objectMapper.writeValueAsString(safty);
 
