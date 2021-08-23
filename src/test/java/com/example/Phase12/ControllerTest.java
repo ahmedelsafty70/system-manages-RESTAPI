@@ -1,10 +1,15 @@
 package com.example.Phase12;
 
+import com.example.Phase12.Repository.DepartmentRepository;
 import com.example.Phase12.Repository.EmployeeRepository;
 import com.example.Phase12.Repository.TeamRepository;
+import com.example.Phase12.controller.DepartmentController;
 import com.example.Phase12.service.EmployeeService;
 import com.example.Phase12.service.Gender;
 import com.example.Phase12.service.TeamService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,17 +19,17 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import static java.lang.String.format;
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc //handle the http request without calling server
@@ -40,6 +45,8 @@ public class ControllerTest {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Autowired
     private EmployeeService employeeService;
@@ -49,25 +56,41 @@ public class ControllerTest {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private DepartmentController departmentController;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
     public void addEmployee() throws Exception {
 
-        Employee safty = new Employee();
+        Calendar instance = Calendar.getInstance();
+        instance.set(2000, 10, 10);
+        Date dateOfBirth = instance.getTime();
+        Date dateOfGraduation = instance.getTime();
+
+        Employee employee1 = new Employee();
         Optional<Team> team = teamRepository.findById(1);
-        safty.setGender(Gender.Female);
-        safty.setName("sasao");
-        safty.setNetSalary(1000.65F);
-        safty.setGrossSalary(employeeService.CalculateGrossSalary(safty.getNetSalary()));
-        safty.setGraduationDate("2023,10,15");
-        safty.setDateOfBirth("2000,10,10");
+        employee1.setGender(Gender.Female);
+        employee1.setIdEmployee(90);
+        employee1.setName("safty");
+        employee1.setGrossSalary(1000.65F);
+        employee1.setNetSalary((float) (1000.65F - (1000.65F * 0.15) + 500));
 
-        Department department = new Department();
+        employee1.setGraduationDate(dateOfGraduation);
+        employee1.setDateOfBirth(dateOfBirth);
+        int departmentId = 45;
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        employee1.setDepartment(department.get());
+        employee1.setTeam(team.get());
+        System.out.println("\n \n \n *------------------" + employee1.getDateOfBirth());
 
+        String employee = objectMapper.writeValueAsString(employee1);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String employee = objectMapper.writeValueAsString(safty);
-
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/add").contentType(MediaType.APPLICATION_JSON).content(employee)).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/employees/add")
+                .contentType(MediaType.APPLICATION_JSON).content(employee))
+                .andDo(print()).andExpect(status().isOk()).andExpect(content().json(employee));
 
     }
 
@@ -81,7 +104,8 @@ public class ControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String employeeJSON = objectMapper.writeValueAsString(employee);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/submittingUser/" + idManager).contentType(MediaType.APPLICATION_JSON).content(employeeJSON))
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/submittingUser/" + idManager)
+                .contentType(MediaType.APPLICATION_JSON).content(employeeJSON))
                 .andExpect(status().isOk());
 
     }
@@ -189,7 +213,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void GettingEmployeesRecursively() throws Exception{
+    public void GettingEmployeesRecursively() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/gettingEmployeesRecursively/38"));
     }

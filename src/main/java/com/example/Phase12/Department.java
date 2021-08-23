@@ -1,5 +1,7 @@
 package com.example.Phase12;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,8 +14,8 @@ public class Department {
 
     @Column(name = "departmentName")
     private String name;
-
-    @OneToMany(mappedBy = "department")
+    @JsonIgnore
+    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
         private List<Employee> employees;
 
     public Department() {

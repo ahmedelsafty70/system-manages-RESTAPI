@@ -4,7 +4,6 @@ import com.example.Phase12.service.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -14,19 +13,18 @@ import java.util.Optional;
     public class Employee {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
     @Column(name = "idEmployee")
     private Integer idEmployee;
     @Column(name = "name")
     private String name;
     @Column(name = "dateOfBirth")
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "graduationDate")
-    private String graduationDate;
+    private Date graduationDate;
 
 
     @Column(name = "netSalary")
@@ -42,7 +40,7 @@ import java.util.Optional;
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 
@@ -101,11 +99,11 @@ import java.util.Optional;
         this.idEmployee = idEmployee;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -117,11 +115,11 @@ import java.util.Optional;
         this.gender = gender;
     }
 
-    public String getGraduationDate() {
+    public Date getGraduationDate() {
         return graduationDate;
     }
 
-    public void setGraduationDate(String graduationDate) {
+    public void setGraduationDate(Date graduationDate) {
         this.graduationDate = graduationDate;
     }
 
@@ -174,6 +172,7 @@ import java.util.Optional;
     public void setTeam(Team team) {
         this.team = team;
     }
+
 
 
 }

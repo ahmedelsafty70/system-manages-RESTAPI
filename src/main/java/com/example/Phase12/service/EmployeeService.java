@@ -21,8 +21,11 @@ public class EmployeeService {
     public EmployeeRepository employeeRepository;
 
 
-    public Employee savingEmployee(Employee employee) {
-
+    public Employee savingEmployee(Employee employee) throws Exception {
+        if(employeeRepository.existsById(employee.getIdEmployee()))
+        {
+            throw new Exception("User exists already !");
+        }
         return employeeRepository.save(employee);
     }
 
@@ -31,7 +34,7 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public Employee modifyUser(Employee employeeModifiedData , Integer id) throws NotFoundException {
+    public Employee modifyUser(Employee employeeModifiedData , Integer id) throws Exception {
        //
         // Employee empToModify = getUser(employeeModifiedData.getIdEmployee()).isPresent() ? getUser(employeeModifiedData.getIdEmployee()).get() : null;
         Employee finalModifiedOnEmployee;
@@ -46,7 +49,7 @@ public class EmployeeService {
         return employeeModifiedData;
     }
 
-    public Employee puttingEmployeesUnderneathManger(Employee employee , String id) throws NotFoundException {
+    public Employee puttingEmployeesUnderneathManger(Employee employee , String id) throws Exception {
 
         Optional<Employee> manager = getUser(parseInt(id));
         employee.setManager(manager.get());
@@ -96,10 +99,10 @@ public class EmployeeService {
         return employeeRepository.getEmployeesUnderManagerRecursively(id);
     }
 
-    public Float CalculateGrossSalary(Float netSalary) {
-        double grossSalary = netSalary - (netSalary * 0.15) - 500;
-        float grossSalaryFloat = (float)grossSalary;
-        return grossSalaryFloat;
+    public Float CalculateGrossSalary(Float grossSalary) {
+        double netSalary = grossSalary - (grossSalary * 0.15) - 500;
+        float netSalaryFloat = (float)netSalary;
+        return netSalaryFloat;
     }
 }
 

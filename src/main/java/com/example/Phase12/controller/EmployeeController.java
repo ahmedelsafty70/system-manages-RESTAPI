@@ -5,6 +5,7 @@ import com.example.Phase12.EmployeeDEO;
 import com.example.Phase12.service.EmployeeService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -15,15 +16,16 @@ import java.util.Optional;
 import static java.lang.Integer.parseInt;
 
 @RestController
-@RequestMapping(value="/HumanResources")
+@RequestMapping(value="/HumanResources/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping(value="/add")
-    public void addingUser(@RequestBody Employee employee){
-        employeeService.savingEmployee(employee);
+    @PostMapping(value="/add",produces=MediaType.APPLICATION_JSON_VALUE)
+    public Employee addingUser(@RequestBody Employee employee) throws Exception {
+
+        return employeeService.savingEmployee(employee);
     }
 
     @RequestMapping(value = "/gettingUser" )
@@ -38,13 +40,13 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/submittingUser/{id}")
-    public Employee addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException{
+    public Employee addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws Exception {
 
         return employeeService.puttingEmployeesUnderneathManger(employee,id);
 
     }
     @PutMapping(value = {"/updating/{id}"})
-    public Employee setEmployeeService(@RequestBody Employee employee, @PathVariable String id) throws NotFoundException {
+    public Employee setEmployeeService(@RequestBody Employee employee, @PathVariable String id) throws Exception {
 
        return employeeService.modifyUser(employee,parseInt(id));
 
