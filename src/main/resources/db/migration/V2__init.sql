@@ -1,0 +1,9 @@
+-- INSERT INTO team(id_team, team_name)
+-- VALUES('12','teto');
+--
+-- INSERT INTO team(id, department_name)
+-- VALUES('11','computer');
+--
+--
+-- INSERT INTO employee(id_employee, date_Of_birth, graduation, gender, name, net_salary, gross_salary, department_id, manager_id, team_id)
+-- VALUES('23', '20-1-2000', '20-2-2001', 'Male', 'safty', '20000', '500', '15', '1', '12');
