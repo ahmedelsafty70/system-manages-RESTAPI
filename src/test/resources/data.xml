@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <team id_team='1' team_name='asfalt'/>
+    <department id="1" department_name="abc"/>
+
+    <employee id_employee='1' name="Charles" gender='Male' net_salary="454.6"
+              gross_salary="67.7" department_id='1' team_id='1'/>
+    <employee id_employee='2' name='safty' gender='Male' net_salary='454'
+              gross_salary='67.7' department_id='1' team_id='1' manager_id = '1'/>
+    <employee id_employee='3' name='abbas' gender='Male' net_salary='454'
+              gross_salary='67.7' department_id='1' team_id='1' manager_id = '2'/>
+
+</dataset>

@@ -3,6 +3,7 @@ package com.example.Phase12;
 
 import com.example.Phase12.service.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,11 +12,14 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "employee")
+@DatabaseSetup("data.xml")
+
     public class Employee {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmployee")
-    private Integer idEmployee;
+    private int idEmployee;
     @Column(name = "name")
     private String name;
     @Column(name = "dateOfBirth")
@@ -29,9 +33,9 @@ import java.util.Optional;
 
 
     @Column(name = "netSalary")
-    private Float netSalary;
+    private float netSalary;
     @Column(name = "grossSalary")
-    private Float grossSalary;
+    private float grossSalary;
 
     @JsonIgnore
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -66,7 +70,7 @@ import java.util.Optional;
             destination.get().setDepartment(source.getDepartment());
 //        if(source.manager != null)
 //            destination.setManager(source.getManager());
-        if(source.grossSalary != null)
+        if(source.grossSalary !=0)
             destination.get().setGrossSalary(source.getGrossSalary());
     }
 
@@ -92,11 +96,11 @@ import java.util.Optional;
         this.name = name;
     }
 
-    public Integer getIdEmployee() {
+    public int getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(Integer idEmployee) {
+    public void setIdEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
 
@@ -128,11 +132,11 @@ import java.util.Optional;
         return department;
     }
 
-    public Float getGrossSalary() {
+    public float getGrossSalary() {
         return grossSalary;
     }
 
-    public void setGrossSalary(Float grossSalary) {
+    public void setGrossSalary(float grossSalary) {
         this.grossSalary = grossSalary;
     }
 
@@ -156,11 +160,11 @@ import java.util.Optional;
         this.listOfEmployees = listOfEmployees;
     }
 
-    public Float getNetSalary() {
+    public float getNetSalary() {
         return netSalary;
     }
 
-    public void setNetSalary(Float netSalary) {
+    public void setNetSalary(float netSalary) {
         this.netSalary = netSalary;
     }
 

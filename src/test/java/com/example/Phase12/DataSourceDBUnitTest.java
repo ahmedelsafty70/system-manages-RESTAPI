@@ -2,6 +2,8 @@ package com.example.Phase12;
 
 import org.dbunit.DataSourceBasedDBTestCase;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -18,13 +20,29 @@ public class DataSourceDBUnitTest extends DataSourceBasedDBTestCase {
     @Override
     protected DataSource getDataSource() {
 
-        return DataSourceBuilder
-                .create()
-                .build();
+        JdbcDataSource dataSource = new JdbcDataSource();
+        dataSource.setURL(
+                "jdbc:h2:mem:testdb");
+        dataSource.setUser("sa");
+        dataSource.setPassword("sa");
+        return dataSource;
     }
 
     @Override
     protected IDataSet getDataSet() throws Exception {
-        return null;
+        return new FlatXmlDataSetBuilder().build(getClass().getClassLoader()
+                .getResourceAsStream("data.xml"));
     }
+
+    @Override
+    protected DatabaseOperation getSetUpOperation() {
+        return DatabaseOperation.REFRESH;
+    }
+
+    @Override
+    protected DatabaseOperation getTearDownOperation() {
+        return DatabaseOperation.DELETE_ALL;
+    }
+
+
 }

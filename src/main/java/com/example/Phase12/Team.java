@@ -2,12 +2,14 @@ package com.example.Phase12;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name ="team")
+@DatabaseSetup("data.xml")
 public class Team {
 
     @Id

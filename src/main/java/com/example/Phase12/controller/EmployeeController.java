@@ -26,10 +26,11 @@ public class EmployeeController {
     public Employee addingUser(@RequestBody Employee employee) throws Exception {
 
         return employeeService.savingEmployee(employee);
+
     }
 
-    @RequestMapping(value = "/gettingUser" )
-    public Optional<Employee> getUser(int id){
+        @RequestMapping(value = "/gettingUser/{id}" )
+    public Optional<Employee> getUser(@PathVariable int id){
 
         try {
             return employeeService.getUser(id);
@@ -53,7 +54,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping(value = "/deleting/{id}")
-    public void deleteEmployee(@PathVariable int id) throws NotFoundException{
+    public void deleteEmployee(@PathVariable int id) throws Exception {
 
 
         Optional<Employee> employee = employeeService.getUser(id);
@@ -61,6 +62,9 @@ public class EmployeeController {
         {
             employeeService.ReplacingEmployeesToAnotherManager(employee);
             employeeService.deleteEmployee(id);
+        }else
+        {
+            throw new Exception("can't delete employee with no manager!");
         }
 
 

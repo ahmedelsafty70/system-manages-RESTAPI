@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-   @Query(value = "with recursive cte as (\n" +
+   @Query(value = "with recursive cte(id_employee, date_of_birth, gender, graduation_date, gross_salary, name, net_salary, department_id, manager_id, team_id) as (\n" +
            "  select     id_employee, date_of_birth, gender, graduation_date, gross_salary, name, net_salary, department_id, manager_id, team_id\n" +
            "\n" +
            "  from       employee\n" +

@@ -1,8 +1,8 @@
 package com.example.Phase12;
 
 public class EmployeeDEO {
-    private Float netSalary;
-    private Float grossSalary;
+    private float netSalary;
+    private float grossSalary;
 
     public EmployeeDEO() {
     }
@@ -15,19 +15,19 @@ public class EmployeeDEO {
         return employeeDEO;
     }
 
-    public Float getNetSalary() {
+    public float getNetSalary() {
         return netSalary;
     }
 
-    public void setNetSalary(Float netSalary) {
+    public void setNetSalary(float netSalary) {
         this.netSalary = netSalary;
     }
 
-    public Float getGrossSalary() {
+    public float getGrossSalary() {
         return grossSalary;
     }
 
-    public void setGrossSalary(Float grossSalary) {
+    public void setGrossSalary(float grossSalary) {
         this.grossSalary = grossSalary;
     }
 }

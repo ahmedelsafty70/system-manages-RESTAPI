@@ -24,7 +24,7 @@ public class EmployeeService {
     public Employee savingEmployee(Employee employee) throws Exception {
         if(employeeRepository.existsById(employee.getIdEmployee()))
         {
-            throw new Exception("User exists already !");
+            throw new Exception("employee already exists !");
         }
         return employeeRepository.save(employee);
     }
@@ -53,7 +53,7 @@ public class EmployeeService {
 
         Optional<Employee> manager = getUser(parseInt(id));
         employee.setManager(manager.get());
-        savingEmployee(employee);
+        employeeRepository.save(employee);
         return employee;
     }
 
@@ -66,8 +66,7 @@ public class EmployeeService {
 
     public EmployeeDEO gettingSalaries(int id) throws NotFoundException {
         Employee employee = getUser(id).isPresent() ? getUser(id).get() : null;
-        EmployeeDEO newEmployee =  new EmployeeDEO();
-        newEmployee = EmployeeDEO.EmployeeDEOFunc(employee);
+        EmployeeDEO newEmployee =  EmployeeDEO.EmployeeDEOFunc(employee);
 
         return newEmployee ;
     }

@@ -1,20 +1,19 @@
 create table team
 (
-    id_team   int not null
-        primary key,
+    id_team   integer AUTO_INCREMENT not null  primary key,
     team_name varchar(255) null
 );
 
 create table department
 (
-    id       int not null
+    id       integer AUTO_INCREMENT not null
         primary key,
     department_name varchar(255) null
 );
 
 create table employee
 (
-    id_employee     int not null
+    id_employee     integer AUTO_INCREMENT not null
         primary key,
     date_of_birth   datetime null,
     gender          varchar(255) null,
@@ -22,9 +21,9 @@ create table employee
     gross_salary    float null,
     name            varchar(255) null,
     net_salary      float null,
-    department_id   int null,
-    manager_id      int null,
-    team_id         int null,
+    department_id   integer null,
+    manager_id      integer null,
+    team_id         integer null,
     constraint FK8d7lrsr6kwirr93rx0tafnoqa
         foreign key (team_id) references team (id_team),
     constraint FKbejtwvg9bxus2mffsm3swj3u9
