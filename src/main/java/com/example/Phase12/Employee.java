@@ -33,9 +33,9 @@ import java.util.Optional;
 
 
     @Column(name = "netSalary")
-    private float netSalary;
+    private Float netSalary;
     @Column(name = "grossSalary")
-    private float grossSalary;
+    private Float grossSalary;
 
     @JsonIgnore
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -132,11 +132,11 @@ import java.util.Optional;
         return department;
     }
 
-    public float getGrossSalary() {
+    public Float getGrossSalary() {
         return grossSalary;
     }
 
-    public void setGrossSalary(float grossSalary) {
+    public void setGrossSalary(Float grossSalary) {
         this.grossSalary = grossSalary;
     }
 
@@ -160,11 +160,11 @@ import java.util.Optional;
         this.listOfEmployees = listOfEmployees;
     }
 
-    public float getNetSalary() {
+    public Float getNetSalary() {
         return netSalary;
     }
 
-    public void setNetSalary(float netSalary) {
+    public void setNetSalary(Float netSalary) {
         this.netSalary = netSalary;
     }
 

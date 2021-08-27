@@ -29,16 +29,7 @@ public class EmployeeController {
 
     }
 
-        @RequestMapping(value = "/gettingUser/{id}" )
-    public Optional<Employee> getUser(@PathVariable int id){
 
-        try {
-            return employeeService.getUser(id);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @PostMapping(value = "/submittingUser/{id}")
     public Employee addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws Exception {
@@ -81,7 +72,7 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "gettingEmployee/{id}")
+    @GetMapping(value = "gettingEmployee/{id}")
     public Employee GettingInfoOfEmployee(@PathVariable String id) throws Exception {
         return employeeService.GettingInfo(id);
 

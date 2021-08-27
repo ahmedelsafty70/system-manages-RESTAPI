@@ -11,21 +11,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.ExpectedDatabase;
-import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import javassist.NotFoundException;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.flywaydb.core.internal.database.base.Connection;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
@@ -33,16 +25,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import javax.print.attribute.standard.MediaSize;
-import javax.transaction.Transactional;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 import static java.lang.String.format;
@@ -126,27 +111,6 @@ public class ControllerTest {
 
 
     }
-
-
-//    @Test
-//
-//    public void AddEmployeesToManger() throws Exception {  //Done   (Works only with Debugging)
-//        int idManager = 2;
-//
-//        Employee employee = employeeService.getUser(1).get();
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String employeeJSON = objectMapper.writeValueAsString(employee);
-//
-//        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/employees/submittingUser/" + idManager)
-//                .contentType(MediaType.APPLICATION_JSON).content(employeeJSON))
-//                .andExpect(status().isOk());
-//        Optional<Employee> employeeForTesting = employeeRepository.findById(1);
-//
-//        Assertions.assertEquals(employee.getIdEmployee(), employeeForTesting.get().getIdEmployee());
-//        //    Assertions.assertEquals(employee.getGender(),employeeForTesting.getGender());
-//
-//    }
 
 
     @Test   //Done
