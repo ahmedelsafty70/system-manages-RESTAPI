@@ -1,8 +1,8 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.Employee;
-import com.example.Phase12.Repository.TeamRepository;
-import com.example.Phase12.Team;
+import com.example.Phase12.repository.TeamRepository;
+import com.example.Phase12.sections.Employee;
+import com.example.Phase12.sections.Team;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

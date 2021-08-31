@@ -1,12 +1,11 @@
 package com.example.Phase12;
 
-import com.example.Phase12.Repository.DepartmentRepository;
-import com.example.Phase12.Repository.EmployeeRepository;
-import com.example.Phase12.Repository.TeamRepository;
+import com.example.Phase12.repository.DepartmentRepository;
+import com.example.Phase12.repository.EmployeeRepository;
+import com.example.Phase12.repository.TeamRepository;
+import com.example.Phase12.sections.*;
 import com.example.Phase12.controller.DepartmentController;
-import com.example.Phase12.service.EmployeeService;
-import com.example.Phase12.service.Gender;
-import com.example.Phase12.service.TeamService;
+import com.example.Phase12.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -163,7 +162,7 @@ public class ControllerTest {
         if(employee == null)
             throw new NotFoundException("didnt find this id");
 
-        EmployeeDEO expectedDTO = EmployeeDEO.EmployeeDEOFunc(employee);
+        EmployeeDTO expectedDTO = EmployeeDTO.EmployeeDEOFunc(employee);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String expectedDTOJSON = objectMapper.writeValueAsString(expectedDTO);

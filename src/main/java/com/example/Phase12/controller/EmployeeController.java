@@ -1,15 +1,14 @@
 package com.example.Phase12.controller;
 
-import com.example.Phase12.Employee;
-import com.example.Phase12.EmployeeDEO;
+import com.example.Phase12.repository.EmployeeRepository;
+import com.example.Phase12.sections.Employee;
+import com.example.Phase12.sections.EmployeeDTO;
 import com.example.Phase12.service.EmployeeService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +20,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @PostMapping(value="/add",produces=MediaType.APPLICATION_JSON_VALUE)
     public Employee addingUser(@RequestBody Employee employee) throws Exception {
@@ -67,22 +69,26 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/gettingSalary/{id}")
-    public EmployeeDEO SalaryInfo(@PathVariable int id) throws NotFoundException {
+    public EmployeeDTO SalaryInfo(@PathVariable int id) throws NotFoundException {
         return employeeService.gettingSalaries(id);
+
+    }
+
+    @GetMapping("/users")
+    public List<Employee> users(){
+        return this.employeeRepository.findAll();
 
     }
 
     @GetMapping(value = "gettingEmployee/{id}")
     public Employee GettingInfoOfEmployee(@PathVariable String id) throws Exception {
         return employeeService.GettingInfo(id);
-
     }
 
-    @GetMapping(value = "/gettingUnderEmployees/{id}")
+    @GetMapping(value = "/gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas
         public List<Employee> EmployeesManager(@PathVariable int id) throws NotFoundException{
            return employeeService.ReturningList(id);
         }
-
 
 
 }

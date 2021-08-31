@@ -1,8 +1,9 @@
 package com.example.Phase12;
 
-import com.example.Phase12.service.DepartmentService;
-import com.example.Phase12.service.EmployeeService;
-import com.example.Phase12.service.Gender;
+import com.example.Phase12.sections.Department;
+import com.example.Phase12.sections.Employee;
+import com.example.Phase12.sections.Gender;
+import com.example.Phase12.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

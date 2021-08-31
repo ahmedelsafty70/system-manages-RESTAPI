@@ -24,6 +24,12 @@ create table employee
     department_id   integer null,
     manager_id      integer null,
     team_id         integer null,
+    username        varchar(255) null,
+    password        varchar(255) null,
+    active          integer null,
+    permissions     varchar(255) null,
+    roles           varchar(255) null,
+
     constraint FK8d7lrsr6kwirr93rx0tafnoqa
         foreign key (team_id) references team (id_team),
     constraint FKbejtwvg9bxus2mffsm3swj3u9

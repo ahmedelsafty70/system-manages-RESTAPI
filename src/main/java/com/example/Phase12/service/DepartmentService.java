@@ -1,7 +1,7 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.Department;
-import com.example.Phase12.Repository.DepartmentRepository;
+import com.example.Phase12.repository.DepartmentRepository;
+import com.example.Phase12.sections.Department;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,18 +1,18 @@
-package com.example.Phase12;
+package com.example.Phase12.sections;
 
-public class EmployeeDEO {
+public class EmployeeDTO {
     private float netSalary;
     private float grossSalary;
 
-    public EmployeeDEO() {
+    public EmployeeDTO() {
     }
 
-    public static EmployeeDEO EmployeeDEOFunc(Employee employee) {
-        EmployeeDEO employeeDEO = new EmployeeDEO();
+    public static EmployeeDTO EmployeeDEOFunc(Employee employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
 
-        employeeDEO.setGrossSalary(employee.getGrossSalary());
-        employeeDEO.setNetSalary(employee.getNetSalary());
-        return employeeDEO;
+        employeeDTO.setGrossSalary(employee.getGrossSalary());
+        employeeDTO.setNetSalary(employee.getNetSalary());
+        return employeeDTO;
     }
 
     public float getNetSalary() {

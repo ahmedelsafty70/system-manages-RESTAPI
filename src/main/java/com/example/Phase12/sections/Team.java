@@ -1,5 +1,4 @@
-package com.example.Phase12;
-
+package com.example.Phase12.sections;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.springtestdbunit.annotation.DatabaseSetup;

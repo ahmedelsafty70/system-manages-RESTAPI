@@ -1,18 +1,13 @@
-package com.example.Phase12.Repository;
+package com.example.Phase12.repository;
 
-import com.example.Phase12.Employee;
+import com.example.Phase12.sections.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
    @Query(value = "with recursive cte(id_employee, date_of_birth, gender, graduation_date, gross_salary, name, net_salary, department_id, manager_id, team_id) as (\n" +
@@ -34,4 +29,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query("DELETE from Employee  where idEmployee =?1")
     @Modifying()
     void deleteById(Integer id);
+
+    Employee findByUsername(String username);
 }

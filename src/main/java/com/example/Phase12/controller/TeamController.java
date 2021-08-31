@@ -1,7 +1,7 @@
 package com.example.Phase12.controller;
 
-import com.example.Phase12.Employee;
-import com.example.Phase12.Team;
+import com.example.Phase12.sections.Employee;
+import com.example.Phase12.sections.Team;
 import com.example.Phase12.service.TeamService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

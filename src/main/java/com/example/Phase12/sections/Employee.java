@@ -1,14 +1,11 @@
-package com.example.Phase12;
+package com.example.Phase12.sections;
 
 
-import com.example.Phase12.service.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Entity
 @Table(name = "employee")
@@ -17,7 +14,7 @@ import java.util.Optional;
     public class Employee {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmployee")
     private int idEmployee;
     @Column(name = "name")
@@ -27,6 +24,9 @@ import java.util.Optional;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    //@Enumerated(EnumType.STRING) //security
+    private String roles;
 
     @Column(name = "graduationDate")
     private Date graduationDate;
@@ -54,6 +54,15 @@ import java.util.Optional;
     @JoinColumn(name = "teamId")
     private Team team;
 
+    @Column(nullable = false)
+    private String username;  //security
+
+    @Column(nullable = false)
+    private String password; //security
+
+    private int active; //security
+
+    private String permissions = ""; //security
 
 
 
@@ -83,9 +92,14 @@ import java.util.Optional;
         this.name = name;
 
         this.gender = gender;
-//        this.graduationDate = graduationDate;
-//        this.department = department;
-//        this.manager = manager;
+    }
+
+    public Employee(String username, String password, String roles, String permissions){
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.permissions = permissions;
+        this.active = 1;
     }
 
     public String getName() {
@@ -112,6 +126,22 @@ import java.util.Optional;
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Gender getGender() {
         return this.gender;
     }
@@ -130,6 +160,30 @@ import java.util.Optional;
 
     public Department getDepartment() {
         return department;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public Float getGrossSalary() {
@@ -178,6 +232,18 @@ import java.util.Optional;
         this.team = team;
     }
 
+    public List<String> getRoleList(){
+        if(this.roles.length() > 0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
 
+    public List<String> getPermissionList(){
+        if(this.permissions.length() > 0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
+    }
 
 }

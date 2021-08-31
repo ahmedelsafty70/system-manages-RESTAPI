@@ -1,7 +1,6 @@
-package com.example.Phase12.Repository;
+package com.example.Phase12.repository;
 
-import com.example.Phase12.Department;
-import com.example.Phase12.Employee;
+import com.example.Phase12.sections.Department;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

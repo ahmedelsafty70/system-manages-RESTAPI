@@ -1,13 +1,12 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.Employee;
-import com.example.Phase12.EmployeeDEO;
-import com.example.Phase12.Repository.EmployeeRepository;
+import com.example.Phase12.repository.EmployeeRepository;
+import com.example.Phase12.sections.Employee;
+import com.example.Phase12.sections.EmployeeDTO;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,21 +57,36 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(int id){
-
-
         employeeRepository.deleteById(id);
-       // employeeRepository.delete(employeeRepository.getById(id));
     }
 
-    public EmployeeDEO gettingSalaries(int id) throws NotFoundException {
+    public EmployeeDTO gettingSalaries(int id) throws NotFoundException {
+
         Employee employee = getUser(id).isPresent() ? getUser(id).get() : null;
-        EmployeeDEO newEmployee =  EmployeeDEO.EmployeeDEOFunc(employee);
+
+//        Role roleOfEmployee = employee.getRole();
+//
+//        if(employee.getRole() == MANAGER){
+//            List<Employee> listOfEmployees = getEmployeesUnderManagerRecursively(id);
+//            for (int i = 0; i < listOfEmployees.size(); i++) {
+//                listOfEmployees.get().
+//            }
+//        }
+//        else if(employee.getRole() == HR){
+//
+//
+//        }    TO BE CONTINUED ........................
+
+        List<Employee> listOfEmployees = getEmployeesUnderManagerRecursively(id);
+
+        EmployeeDTO newEmployee =  EmployeeDTO.EmployeeDEOFunc(employee);
 
         return newEmployee ;
     }
 
     public List<Employee> ReturningList(int id) throws NotFoundException{
         Employee employee = getUser(id).isPresent() ? getUser(id).get() : null;
+
         assert employee != null;
         return employee.getListOfEmployees();
     }

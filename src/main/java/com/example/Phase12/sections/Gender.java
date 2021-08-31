@@ -1,4 +1,4 @@
-package com.example.Phase12.service;
+package com.example.Phase12.sections;
 
 public enum Gender {
 
