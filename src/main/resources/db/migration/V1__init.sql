@@ -19,7 +19,8 @@ create table employee
     gender          varchar(255) null,
     graduation_date datetime null,
     gross_salary    float null,
-    name            varchar(255) null,
+--     first_name      varchar(255) null,
+    second_name     varchar(255) null,
     net_salary      float null,
     department_id   integer null,
     manager_id      integer null,
@@ -29,6 +30,13 @@ create table employee
     active          integer null,
     permissions     varchar(255) null,
     roles           varchar(255) null,
+    national_id     varchar(255) null unique,
+    joined_year     integer null,
+    degree_enum     varchar(255) null,
+    bonus       double null,
+    raises      double null,
+    years_of_experience integer null,
+
 
     constraint FK8d7lrsr6kwirr93rx0tafnoqa
         foreign key (team_id) references team (id_team),
@@ -38,7 +46,36 @@ create table employee
         foreign key (manager_id) references employee (id_employee)
 );
 
+create table vacation
+(
+    id       integer AUTO_INCREMENT not null
+        primary key,
+    employee_name varchar(255) null,
+    year          integer null,
+    exceeded_day  integer null,
+    employee_id   integer null,
 
+    constraint vacations_employee_employeeId_fk
+        foreign key (employee_id) references   employee  (id_employee)
+
+);
+
+create table salary_details
+(
+    id       integer AUTO_INCREMENT not null
+        primary key,
+--     gross_salary float null,
+--     net_salary   float null,
+    actual_salary   float null,
+    date        Date  null,
+  --  raises      double null,
+    employee_id   integer null,
+
+
+    constraint SalaryDetails_employee_employeeId_fk
+        foreign key (employee_id) references   employee  (id_employee)
+
+)
 
 
 

@@ -1,11 +1,13 @@
 package com.example.Phase12.controller;
 
+import com.example.Phase12.commands.addEmployeeCommand;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.sections.Employee;
 import com.example.Phase12.sections.EmployeeDTO;
 import com.example.Phase12.service.EmployeeService;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,48 +20,61 @@ import static java.lang.Integer.parseInt;
 @RequestMapping(value="/HumanResources/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
 
-    @Autowired
+    private EmployeeService employeeService;
     private EmployeeRepository employeeRepository;
 
+    public EmployeeController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
+        this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
+    }
+
     @PostMapping(value="/add",produces=MediaType.APPLICATION_JSON_VALUE)
-    public Employee addingUser(@RequestBody Employee employee) throws Exception {
+    public addEmployeeCommand addingUser(@RequestBody addEmployeeCommand employee) throws Exception {
+
+        if(employeeRepository.existsById(employee.getIdEmployee()))
+            throw new BadArgumentsException("employee with this id is added before!");
+        if(employee.getSecond_name() == null )
+            throw new ResourceNotFoundException("The second_name is null");
+        if(employee.getGrossSalary() == null)
+            throw new ResourceNotFoundException("The salary is null");
+        if(employee.getGrossSalary() < 0)
+            throw new BadArgumentsException("employee with is id is added before!");
+        if(employee.getActive() == 0)
+            throw new BadArgumentsException("Employee.getActive is null");
+        if(employee.getNational_id().equals(null))
+            throw new ResourceNotFoundException("The second_name is null");
+        if(Integer.parseInt(employee.getNational_id()) < 0)
+            throw new BadArgumentsException("INVALID national-id");
+
 
         return employeeService.savingEmployee(employee);
 
     }
 
-
-
-    @PostMapping(value = "/submittingUser/{id}")
-    public Employee addingEmployeesToManger(@RequestBody Employee employee, @PathVariable String id) throws Exception {
-
-        return employeeService.puttingEmployeesUnderneathManger(employee,id);
-
-    }
     @PutMapping(value = {"/updating/{id}"})
-    public Employee setEmployeeService(@RequestBody Employee employee, @PathVariable String id) throws Exception {
+    public addEmployeeCommand setEmployeeService(@RequestBody addEmployeeCommand employeeCommand, @PathVariable int id) throws Exception {
 
-       return employeeService.modifyUser(employee,parseInt(id));
+       return employeeService.modifyUser(employeeCommand,id);
 
     }
 
     @DeleteMapping(value = "/deleting/{id}")
     public void deleteEmployee(@PathVariable int id) throws Exception {
 
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("employee with this id is not found!");
 
         Optional<Employee> employee = employeeService.getUser(id);
         if(employee.get().getManager() != null  && employee.get().getListOfEmployees() != null)
         {
             employeeService.ReplacingEmployeesToAnotherManager(employee);
             employeeService.deleteEmployee(id);
-        }else
+        }
+        else
         {
             throw new Exception("can't delete employee with no manager!");
         }
-
 
     }
 
@@ -70,24 +85,34 @@ public class EmployeeController {
 
     @GetMapping(value = "/gettingSalary/{id}")
     public EmployeeDTO SalaryInfo(@PathVariable int id) throws NotFoundException {
-        return employeeService.gettingSalaries(id);
 
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("employee with this id is not found!");
+
+        return employeeService.gettingSalaries(id);
     }
 
     @GetMapping("/users")
     public List<Employee> users(){
         return this.employeeRepository.findAll();
-
     }
 
-    @GetMapping(value = "gettingEmployee/{id}")
-    public Employee GettingInfoOfEmployee(@PathVariable String id) throws Exception {
-        return employeeService.GettingInfo(id);
+    @GetMapping(value = "gettingEmployee")
+    public addEmployeeCommand GettingInfoOfEmployee(@RequestBody addEmployeeCommand employeeCommand) throws Exception {
+
+        if(!employeeRepository.existsById(employeeCommand.getIdEmployee()))
+            throw new ResourceNotFoundException("employee with this id is not found!");
+
+        return employeeService.GettingInfo(employeeCommand);
     }
 
     @GetMapping(value = "/gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas
-        public List<Employee> EmployeesManager(@PathVariable int id) throws NotFoundException{
-           return employeeService.ReturningList(id);
+        public List<Employee> EmployeesManager(@PathVariable int id){
+
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("employee with this id is not found!");
+
+        return employeeService.ReturningList(id);
         }
 
 

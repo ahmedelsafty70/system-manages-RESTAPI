@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table
-@DatabaseSetup("data.xml")
 public class Department {
     @Id
     @Column(name = "id")

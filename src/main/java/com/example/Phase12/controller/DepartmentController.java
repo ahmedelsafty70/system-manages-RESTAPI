@@ -1,9 +1,13 @@
 package com.example.Phase12.controller;
 
+import com.example.Phase12.commands.addDepartmentCommand;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
+import com.example.Phase12.repository.DepartmentRepository;
 import com.example.Phase12.sections.Department;
 import com.example.Phase12.service.DepartmentService;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,23 +18,35 @@ import java.util.Optional;
 @RequestMapping(value = "/departmentController")
 public class DepartmentController {
     
-    @Autowired
+
     private DepartmentService departmentService;
-    
-    @RequestMapping(value = "/adding")
-    public Department savingDepartment(@RequestBody Department department){
-        return departmentService.savingDepartment(department);
+    private DepartmentRepository departmentRepository;
+
+    public DepartmentController(DepartmentService departmentService, DepartmentRepository departmentRepository) {
+        this.departmentService = departmentService;
+        this.departmentRepository = departmentRepository;
     }
 
-    @RequestMapping(value = "/GetDep" )
-    public Optional<Department> getDep(){
+    @RequestMapping(value = "/adding")
+    public addDepartmentCommand savingDepartment(@RequestBody addDepartmentCommand departmentCommand){
 
-        try {
-            return departmentService.getDepartment(3);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        if(departmentRepository.existsById(departmentCommand.getId()))
+            throw new BadArgumentsException("department with this id is added before!");
+        if(departmentCommand.getName() == null)
+            throw new ResourceNotFoundException("The name is null!");
+
+        return departmentService.savingDepartment(departmentCommand);
+    }
+
+    @RequestMapping(value = "/GetDep/{id}")
+    public Optional<Department> getDep(@PathVariable int id){
+
+        if(!departmentRepository.existsById(id))
+            throw new ResourceNotFoundException("The department with this id not found!");
+
+        return departmentService.getDepartment(id);
+
     }
     
 }

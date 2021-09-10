@@ -8,11 +8,9 @@ import java.util.List;
 
 @Entity
 @Table(name ="team")
-@DatabaseSetup("data.xml")
 public class Team {
 
     @Id
-
     @Column(name = "idTeam")
     private int idTeam;
 

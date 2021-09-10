@@ -1,15 +1,14 @@
 package com.example.Phase12.sections;
 
 
+import com.example.Phase12.commands.addEmployeeCommand;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "employee")
-@DatabaseSetup("data.xml")
 
     public class Employee {
 
@@ -17,23 +16,38 @@ import java.util.*;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmployee")
     private int idEmployee;
-    @Column(name = "name")
-    private String name;
+//    @Column(name = "name")
+//    private String name;
+
+    @Column(name = "second_name")
+    private String second_name;
+
     @Column(name = "dateOfBirth")
     private Date dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    //@Enumerated(EnumType.STRING) //security
-    private String roles;
+    @Column(name = "bonus")
+    private Double bonus=0D;
+
+    @Column(name = "raises")
+    private Double raises=0D;
+
+
+    @Column(name = "joined_year")
+    private Integer joined_year;
+
+    private String roles;   //security
 
     @Column(name = "graduationDate")
     private Date graduationDate;
 
 
+
     @Column(name = "netSalary")
     private Float netSalary;
+
     @Column(name = "grossSalary")
     private Float grossSalary;
 
@@ -41,18 +55,29 @@ import java.util.*;
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Employee> listOfEmployees;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Vacation> vacationList;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 
 
+    @JsonIgnore
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "teamId")
     private Team team;
+
+    @Column(name = "national_id")
+    private String national_id;
 
     @Column(nullable = false)
     private String username;  //security
@@ -64,22 +89,36 @@ import java.util.*;
 
     private String permissions = ""; //security
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<SalaryDetails> listOfSalaryHistories;
+
+    @Enumerated(EnumType.STRING)
+    private DegreeEnum degree_enum;
+
+    @Column(name = "years_of_experience")
+    private int yearsOfExperience;
 
 
-    public Employee(Employee source, Optional<Employee> destination){
-        if(source.name != null)
-            destination.get().setName(source.getName());
-        if(source.dateOfBirth != null)
-            destination.get().setDateOfBirth(source.getDateOfBirth());
-        if (source.gender != null)
-            destination.get().setDateOfBirth(source.getDateOfBirth());
-        if(source.graduationDate != null)
-            destination.get().setGraduationDate(source.getGraduationDate());
-        if(source.department != null)
-            destination.get().setDepartment(source.getDepartment());
-//        if(source.manager != null)
-//            destination.setManager(source.getManager());
-        if(source.grossSalary !=0)
+
+    public Employee(addEmployeeCommand source, Optional<Employee> destination){
+//        if(source.first_name != null)
+//            destination.get().setFirst_name(source.getFirst_name());
+        if(source.getSecond_name() != null)
+            destination.get().setSecond_name(source.getSecond_name());
+        if(source.getRoles() != null)
+            destination.get().setRoles(source.getRoles());
+        if (source.getNational_id() != null)
+            destination.get().setNational_id(source.getNational_id());
+        if(source.getActive() != 0)
+            destination.get().setActive(source.getActive());
+        if(source.getPassword() != null)
+            destination.get().setPassword(source.getPassword());
+        if(source.getUsername() != null)
+            destination.get().setUsername(source.getUsername());
+//        if(source.getYearsOfExperience() !=0)
+//            destination.get().setYearsOfExperience(source.getYearsOfExperience());
+        if(source.getGrossSalary() != null)
             destination.get().setGrossSalary(source.getGrossSalary());
     }
 
@@ -89,26 +128,21 @@ import java.util.*;
     }
 
     public Employee(String name, Gender gender) {
-        this.name = name;
+//        this.name = name;
 
         this.gender = gender;
     }
 
-    public Employee(String username, String password, String roles, String permissions){
+    public Employee(String username, String password, String roles, String permissions,String first_name){
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.permissions = permissions;
+//        this.first_name=first_name;
         this.active = 1;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getIdEmployee() {
         return idEmployee;
@@ -142,6 +176,54 @@ import java.util.*;
         this.password = password;
     }
 
+    public Double getRaises() {
+        return raises;
+    }
+
+    public void setRaises(Double raises) {
+        this.raises = raises;
+    }
+
+    public DegreeEnum getDegreeEnum() {
+        return degree_enum;
+    }
+
+    public void setDegreeEnum(DegreeEnum degreeEnum) {
+        this.degree_enum = degreeEnum;
+    }
+
+    public String getNational_id() {
+        return national_id;
+    }
+
+    public void setNational_id(String national_id) {
+        this.national_id = national_id;
+    }
+
+    public Double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Double bonus) {
+        this.bonus = bonus;
+    }
+
+    public DegreeEnum getDegree_enum() {
+        return degree_enum;
+    }
+
+    public void setDegree_enum(DegreeEnum degree_enum) {
+        this.degree_enum = degree_enum;
+    }
+
+    public int getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
+    public void setYearsOfExperience(int yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
     public Gender getGender() {
         return this.gender;
     }
@@ -158,8 +240,24 @@ import java.util.*;
         this.graduationDate = graduationDate;
     }
 
+    public Integer getJoined_year() {
+        return joined_year;
+    }
+
+    public void setJoined_year(Integer joined_year) {
+        this.joined_year = joined_year;
+    }
+
     public Department getDepartment() {
         return department;
+    }
+
+    public List<Vacation> getVacationList() {
+        return vacationList;
+    }
+
+    public void setVacationList(List<Vacation> vacationList) {
+        this.vacationList = vacationList;
     }
 
     public int getActive() {
@@ -222,7 +320,21 @@ import java.util.*;
         this.netSalary = netSalary;
     }
 
+    public List<SalaryDetails> getListOfSalaryHistories() {
+        return listOfSalaryHistories;
+    }
 
+    public void setListOfSalaryHistories(List<SalaryDetails> listOfSalaryHistories) {
+            listOfSalaryHistories = listOfSalaryHistories;
+    }
+
+    public String getSecond_name() {
+        return second_name;
+    }
+
+    public void setSecond_name(String second_name) {
+        this.second_name = second_name;
+    }
 
     public Team getTeam() {
         return team;
@@ -232,6 +344,8 @@ import java.util.*;
         this.team = team;
     }
 
+
+    @JsonIgnore
     public List<String> getRoleList(){
         if(this.roles.length() > 0){
             return Arrays.asList(this.roles.split(","));
@@ -239,6 +353,8 @@ import java.util.*;
         return new ArrayList<>();
     }
 
+
+    @JsonIgnore
     public List<String> getPermissionList(){
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));

@@ -34,11 +34,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/HumanResources/employees/gettingEmployee/{id}").authenticated()
-                .antMatchers("/**/employees/gettingSalary/**").hasRole("MANAGER") //hasAnyRole to many users
+
+                .antMatchers("/HumanResources/employees/**").hasRole("HR")
+                .antMatchers("/departmentController/add").hasRole("HR")
+                .antMatchers("/departmentController/GetDep/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/teamController/adding").hasRole("HR")
+                .antMatchers("/teamController/gettingEmployeesUnderTeam/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/HumanResources/employees/gettingUnderEmployees/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/VacationController/addVacation").hasRole("HR")
+                .antMatchers("/VacationController/get/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/salaryController/getSalaryDetails/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/salaryController/addSalaryDetails").hasRole("HR")
+                .antMatchers("/HumanResources/employees/deleting/**").hasRole("HR")
+
+
+
                 .antMatchers("/HumanResources/employees/gettingUnderEmployees/{id}").hasAuthority("gettingEmployees")
-                .antMatchers("/HumanResources/employees/add").hasRole("USER")
+                //.antMatchers("/HumanResources/employees/gettingEmployee/**").hasRole("")
+
                 .antMatchers("/HumanResources/employees/deleting/{id}").hasRole("ADMIN")
-                .antMatchers("/HumanResources/employees/gettingEmployeesRecursively/{id}").hasRole("MANAGER")
+              //  .antMatchers("/HumanResources/employees/gettingEmployeesRecursively/{id}").hasRole("MANAGER")
                 .antMatchers("/HumanResources/employees/users").hasRole("MANAGER")
                 .and()
                 .httpBasic();
