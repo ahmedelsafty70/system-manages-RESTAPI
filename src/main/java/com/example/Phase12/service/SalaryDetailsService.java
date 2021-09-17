@@ -1,20 +1,25 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.commands.addSalaryDetailsCommand;
+import com.example.Phase12.ModelMapperGen;
+import com.example.Phase12.commands.salaryDetails.addSalaryDetailsCommand;
+import com.example.Phase12.dto.addSalaryDetailsDto;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.repository.SalaryDetailsRepository;
 import com.example.Phase12.repository.VacationRepository;
 import com.example.Phase12.sections.ConstantsDeduction;
 import com.example.Phase12.sections.Employee;
 import com.example.Phase12.sections.SalaryDetails;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class SalaryDetailsService {
@@ -23,31 +28,46 @@ public class SalaryDetailsService {
     private EmployeeRepository employeeRepository;
     private EmployeeService employeeService;
     private VacationRepository vacationRepository;
+    private ModelMapper modelMapper;
+    private AtomicInteger count = new AtomicInteger(0);
 
-    public SalaryDetailsService(SalaryDetailsRepository salaryDetailsRepository, EmployeeRepository employeeRepository, EmployeeService employeeService) {
+    public SalaryDetailsService(SalaryDetailsRepository salaryDetailsRepository, EmployeeRepository employeeRepository, EmployeeService employeeService, VacationRepository vacationRepository, ModelMapper modelMapper) {
         this.salaryDetailsRepository = salaryDetailsRepository;
         this.employeeRepository = employeeRepository;
         this.employeeService = employeeService;
+        this.vacationRepository = vacationRepository;
+        this.modelMapper = modelMapper;
     }
 
-    public addSalaryDetailsCommand savingSalaryDetails(addSalaryDetailsCommand salaryDetailsCommand){ // To Be Continued
+    private SalaryDetails mapToSalaryDetails(addSalaryDetailsCommand salaryDetailsCommand){
+        SalaryDetails salaryDetails = modelMapper.map(salaryDetailsCommand,SalaryDetails.class);
 
-        SalaryDetails salaryDetails = new SalaryDetails();
-
-        salaryDetails.setActualSalary(salaryDetailsCommand.getActualSalary());
-        salaryDetails.setId(salaryDetailsCommand.getId());
-        salaryDetails.setDate(salaryDetailsCommand.getDate());
-        salaryDetails.setEmployee(salaryDetailsCommand.getEmployee().get());
-
-        salaryDetailsRepository.save(salaryDetails);
-
-        return salaryDetailsCommand;
+        return salaryDetails;
     }
 
-    public Optional<SalaryDetails> gettingSalaryDetails(int id){
-        return salaryDetailsRepository.findById(id);
+    public addSalaryDetailsDto savingSalaryDetails(addSalaryDetailsCommand salaryDetailsCommand){ // To Be Continued
+
+        SalaryDetails salaryDetails = mapToSalaryDetails(salaryDetailsCommand);
+
+        SalaryDetails salaryDetailsToBeSaved = salaryDetailsRepository.save(salaryDetails);
+
+        addSalaryDetailsDto salaryDetailsDto = new addSalaryDetailsDto(salaryDetailsToBeSaved.getId(),salaryDetailsToBeSaved.getActualSalary(),salaryDetailsToBeSaved.getDate(),salaryDetailsToBeSaved.getEmployee());
+
+        return salaryDetailsDto;
     }
 
+    public List<addSalaryDetailsDto> gettingSalaryDetails(int id){
+
+        List<SalaryDetails> salaryDetails = salaryDetailsRepository.salaryOfSpecificEmployee(id);
+        List<addSalaryDetailsDto> salaryDetailsDto = new ArrayList<>();
+        for(int i=0;i<salaryDetails.size();i++)
+        {
+            salaryDetailsDto.add(new addSalaryDetailsDto());
+            ModelMapperGen.getModelMapperSingleton().map(salaryDetails.get(i), salaryDetailsDto.get(i));
+        }
+
+        return salaryDetailsDto;
+    }
 
 
 
@@ -74,18 +94,18 @@ public class SalaryDetailsService {
            int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),yearInInteger);
 
            double calculatingNetSalary = employee.getGrossSalary() + employee.getBonus() + employee.getRaises()
-                                            - ConstantsDeduction.insurance - (yearInInteger * (employee.getGrossSalary()/22));
+                                            - ConstantsDeduction.insurance - (noOfDaysExceeded * (employee.getGrossSalary()/22));
 
+           employee.setGrossSalary((float) (employee.getGrossSalary()+ employee.getRaises()));
            employee.setBonus(0D);
            employee.setRaises(0D);
 
-           calculatingNetSalary = calculatingNetSalary - (calculatingNetSalary * ConstantsDeduction.taxes);
 
-           salaryDetails.setActualSalary((float)calculatingNetSalary);
+           salaryDetails.setActualSalary((float)(calculatingNetSalary - (calculatingNetSalary * ConstantsDeduction.taxes)));
 
            salaryDetails.setEmployee(employee);
+
+           salaryDetailsRepository.save(salaryDetails);
        }
-
-
     }
 }

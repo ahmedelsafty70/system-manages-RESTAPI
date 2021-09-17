@@ -12,12 +12,11 @@ public interface VacationRepository extends CrudRepository<Vacation, Integer> {
 
 
     @Transactional
-    @Query(value = "SELECT COUNT(*) FROM vacation WHERE employee_id = :id AND year = :year", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM vacation WHERE employee_id = :id AND current_year = :year", nativeQuery = true)
     int numberOfVacationDays(int id, int year);
 
     @Transactional
-    @Query(value = "SELECT COUNT(*) FROM vacation WHERE employee_id = :id AND exceeded = 1 AND year = :year", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM vacation WHERE employee_id = :id AND exceeded = 1 AND current_year = :year", nativeQuery = true)
     int counterForTheExceededDays(int id, int year);
-
 
 }

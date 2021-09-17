@@ -1,7 +1,6 @@
 package com.example.Phase12.sections;
 
 
-import com.example.Phase12.commands.addEmployeeCommand;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -43,7 +42,8 @@ import java.util.*;
     @Column(name = "graduationDate")
     private Date graduationDate;
 
-
+    @OneToMany(mappedBy="employee")
+    private List<Earnings> earnings ;
 
     @Column(name = "netSalary")
     private Float netSalary;
@@ -101,26 +101,26 @@ import java.util.*;
 
 
 
-    public Employee(addEmployeeCommand source, Optional<Employee> destination){
-//        if(source.first_name != null)
-//            destination.get().setFirst_name(source.getFirst_name());
-        if(source.getSecond_name() != null)
-            destination.get().setSecond_name(source.getSecond_name());
-        if(source.getRoles() != null)
-            destination.get().setRoles(source.getRoles());
-        if (source.getNational_id() != null)
-            destination.get().setNational_id(source.getNational_id());
-        if(source.getActive() != 0)
-            destination.get().setActive(source.getActive());
-        if(source.getPassword() != null)
-            destination.get().setPassword(source.getPassword());
-        if(source.getUsername() != null)
-            destination.get().setUsername(source.getUsername());
-//        if(source.getYearsOfExperience() !=0)
-//            destination.get().setYearsOfExperience(source.getYearsOfExperience());
-        if(source.getGrossSalary() != null)
-            destination.get().setGrossSalary(source.getGrossSalary());
-    }
+//    public Employee(addEmployeeCommand source, Optional<Employee> destination){
+////        if(source.first_name != null)
+////            destination.get().setFirst_name(source.getFirst_name());
+//        if(source.getSecond_name() != null)
+//            destination.get().setSecond_name(source.getSecond_name());
+//        if(source.getRoles() != null)
+//            destination.get().setRoles(source.getRoles());
+//        if (source.getNational_id() != null)
+//            destination.get().setNational_id(source.getNational_id());
+//        if(source.getActive() != 0)
+//            destination.get().setActive(source.getActive());
+//        if(source.getPassword() != null)
+//            destination.get().setPassword(source.getPassword());
+//        if(source.getUsername() != null)
+//            destination.get().setUsername(source.getUsername());
+////        if(source.getYearsOfExperience() !=0)
+////            destination.get().setYearsOfExperience(source.getYearsOfExperience());
+//        if(source.getGrossSalary() != null)
+//            destination.get().setGrossSalary(source.getGrossSalary());
+//    }
 
 
     public Employee() {
@@ -140,6 +140,19 @@ import java.util.*;
         this.permissions = permissions;
 //        this.first_name=first_name;
         this.active = 1;
+    }
+
+    public Employee(Integer idEmployee, String second_name, String roles, String national_id, String username, String password, Integer active, Integer yearsOfExperience, Float grossSalary){
+
+        this.idEmployee = idEmployee;
+        this.second_name = second_name;
+        this.roles = roles;
+        this.national_id = national_id;
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.yearsOfExperience = yearsOfExperience;
+        this.grossSalary = grossSalary;
     }
 
 

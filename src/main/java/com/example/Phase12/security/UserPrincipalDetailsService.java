@@ -21,8 +21,10 @@ public class UserPrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Employee employee = this.employeeRepository.findByUsername(username);
-        UserPrincipal userPrincipal = new UserPrincipal(employee);
-        return userPrincipal;
+        if(employee == null){
+            throw new UsernameNotFoundException("Couldn't find employee by this username");
+        }
+        return new UserPrincipal(employee);
     }
 
 }

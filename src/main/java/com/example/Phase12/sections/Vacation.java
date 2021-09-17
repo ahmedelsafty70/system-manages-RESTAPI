@@ -15,8 +15,8 @@ public class Vacation { // TO CALCULATE HOW MANY DAYS EXCEEDED TO CALCULATE SALA
     @Column(name = "employee_name")
     private String employee_name;
 
-    @Column(name = "year")
-    private int year;
+    @Column(name = "current_year")
+    private int currentYear;
 
     @Column(name = "exceeded_day")
     private int exceeded_day;
@@ -36,14 +36,14 @@ public class Vacation { // TO CALCULATE HOW MANY DAYS EXCEEDED TO CALCULATE SALA
         this.employee_name = employee_name;
     }
 
-    public int getYear() {
-        return year;
+
+    public int getCurrentYear() {
+        return currentYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setCurrentYear(int currentYear) {
+        this.currentYear = currentYear;
     }
-
 
     public Employee getEmployee() {
         return employee;

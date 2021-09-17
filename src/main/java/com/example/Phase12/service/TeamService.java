@@ -1,10 +1,12 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.commands.addTeamCommand;
+import com.example.Phase12.commands.team.addTeamCommand;
+import com.example.Phase12.dto.addTeamDto;
 import com.example.Phase12.repository.TeamRepository;
 import com.example.Phase12.sections.Employee;
 import com.example.Phase12.sections.Team;
 import javassist.NotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,24 +17,42 @@ public class TeamService {
 
 
     public TeamRepository teamRepository;
+    private ModelMapper modelMapper;
 
-    public TeamService(TeamRepository teamRepository) {
+    public TeamService(TeamRepository teamRepository, ModelMapper modelMapper) {
         this.teamRepository = teamRepository;
+        this.modelMapper = modelMapper;
     }
 
-    public addTeamCommand savingTeam(addTeamCommand teamCommand){
+    public addTeamDto savingTeam(addTeamCommand teamCommand){
 
-        Team team = new Team();
-        team.setIdTeam(teamCommand.getIdTeam());
-        team.setTeamName(team.getTeamName());
+        Team team = mapToTeam(teamCommand);
 
-        teamRepository.save(team);
-        return teamCommand;
+        Team teamToBeChanged = teamRepository.save(team);
+
+        addTeamDto teamDto = new addTeamDto(teamToBeChanged.getIdTeam(), teamToBeChanged.getTeamName());
+
+        return teamDto;
     }
 
-    public Optional<Team> getTeam(int id) throws NotFoundException
+    private Team mapToTeam(addTeamCommand teamCommand){
+
+        Team team = modelMapper.map(teamCommand,Team.class);
+        return team;
+    }
+
+    private addTeamDto mapToTeamCommand(Team team){
+        addTeamDto teamDto = modelMapper.map(team,addTeamDto.class);
+        return teamDto;
+    }
+
+    public addTeamDto getTeam(int id)
     {
-        return teamRepository.findById(id);
+        Team team = teamRepository.findById(id).orElse(null);
+
+        addTeamDto teamDto = mapToTeamCommand(team);
+
+        return teamDto;
     }
     public List<Employee> EmployeesUnderTeam(int id) {
         Optional<Team> team = teamRepository.findById(id);

@@ -16,11 +16,11 @@ create table employee
     id_employee     integer AUTO_INCREMENT not null
         primary key,
     date_of_birth   datetime null,
-    gender          varchar(255) null,
+    gender          varchar(255) not null,
     graduation_date datetime null,
-    gross_salary    float null,
+    gross_salary    float not null,
 --     first_name      varchar(255) null,
-    second_name     varchar(255) null,
+    second_name     varchar(255) not null,
     net_salary      float null,
     department_id   integer null,
     manager_id      integer null,
@@ -30,9 +30,9 @@ create table employee
     active          integer null,
     permissions     varchar(255) null,
     roles           varchar(255) null,
-    national_id     varchar(255) null unique,
+    national_id     varchar(255) not null unique,
     joined_year     integer null,
-    degree_enum     varchar(255) null,
+    degree_enum     varchar(255) not null,
     bonus       double null,
     raises      double null,
     years_of_experience integer null,
@@ -51,13 +51,26 @@ create table vacation
     id       integer AUTO_INCREMENT not null
         primary key,
     employee_name varchar(255) null,
-    year          integer null,
+    current_year          integer null,
     exceeded_day  integer null,
     employee_id   integer null,
 
     constraint vacations_employee_employeeId_fk
         foreign key (employee_id) references   employee  (id_employee)
 
+);
+
+create table Earnings
+(
+    id      integer AUTO_INCREMENT
+        primary key,
+    raises     double null,
+    bonus     double null,
+    date      DATE null,
+    employee_id int null,
+
+    constraint earnings_employee_employeeId_fk
+        foreign key (employee_id) references   employee  (id_employee)
 );
 
 create table salary_details

@@ -1,9 +1,11 @@
 package com.example.Phase12.service;
 
-import com.example.Phase12.commands.addDepartmentCommand;
+import com.example.Phase12.commands.department.addDepartmentCommand;
+import com.example.Phase12.dto.addDepartmentDto;
 import com.example.Phase12.repository.DepartmentRepository;
 import com.example.Phase12.sections.Department;
-import javassist.NotFoundException;
+import com.example.Phase12.sections.Employee;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,25 +15,43 @@ public class DepartmentService {
 
 
     public DepartmentRepository departmentRepository;
+    private ModelMapper modelMapper;
 
-    public DepartmentService(DepartmentRepository departmentRepository) {
+    public DepartmentService(DepartmentRepository departmentRepository, ModelMapper modelMapper) {
         this.departmentRepository = departmentRepository;
+        this.modelMapper = modelMapper;
     }
 
-    public addDepartmentCommand savingDepartment(addDepartmentCommand departmentCommand) {
+    private Department mapToDepartment(addDepartmentCommand departmentCommand){
+        Department department = modelMapper.map(departmentCommand,Department.class);
 
-        Department department = new Department();
-
-        department.setName(departmentCommand.getName());
-        department.setId(department.getId());
-
-        departmentRepository.save(department);
-
-        return departmentCommand;
+        return department;
     }
 
-    public Optional<Department> getDepartment(int id){
-        return departmentRepository.findById(id);
+    public addDepartmentDto savingDepartment(addDepartmentCommand departmentCommand) {
+
+        Department department = mapToDepartment(departmentCommand);
+
+        Department departmentSaved = departmentRepository.save(department);
+
+        addDepartmentDto departmentDto = new addDepartmentDto(departmentSaved.getId(),departmentSaved.getName());
+
+        return departmentDto;
+    }
+
+    private addDepartmentDto mapToDepartmentDto(Department department){
+        addDepartmentDto departmentDto = modelMapper.map(department,addDepartmentDto.class);
+
+        return departmentDto;
+    }
+
+
+    public addDepartmentDto getDepartment(Department department){
+
+       //  Department department = departmentRepository.findById(id).orElse(null);
+
+         addDepartmentDto departmentDto = mapToDepartmentDto(department);
+         return departmentDto;
     }
 
 }

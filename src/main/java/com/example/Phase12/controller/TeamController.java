@@ -1,6 +1,7 @@
 package com.example.Phase12.controller;
 
-import com.example.Phase12.commands.addTeamCommand;
+import com.example.Phase12.commands.team.addTeamCommand;
+import com.example.Phase12.dto.addTeamDto;
 import com.example.Phase12.exceptions.BadArgumentsException;
 import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.TeamRepository;
@@ -26,8 +27,8 @@ public class TeamController {
         this.teamRepository = teamRepository;
     }
 
-    @RequestMapping(value = "/adding")
-    public addTeamCommand savingTeam(@RequestBody addTeamCommand teamCommand){
+    @RequestMapping(value = "adding")
+    public addTeamDto savingTeam(@RequestBody addTeamCommand teamCommand){
 
         if(teamRepository.existsById(teamCommand.getIdTeam()))
             throw new BadArgumentsException("team with this id is added before!");
@@ -37,17 +38,15 @@ public class TeamController {
         return teamService.savingTeam(teamCommand);
     }
 
-    @RequestMapping(value = "/getTeam")
-    public Optional<Team> getDep(){
+    @GetMapping(value = "getTeam/{id}")
+    public addTeamDto getTeam(@PathVariable int id){
 
-        try {
-            return teamService.getTeam(3);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        if(!teamRepository.existsById(id))
+            throw new ResourceNotFoundException("team with this id is not found!");
+
+        return teamService.getTeam(id);
     }
-    @GetMapping(value = "/gettingEmployeesUnderTeam/{id}")
+    @GetMapping(value = "gettingEmployeesUnderTeam/{id}")
     public List<Employee> getEmployeesInTeam(@PathVariable int id) throws NotFoundException{
 
         if(!teamRepository.existsById(id))

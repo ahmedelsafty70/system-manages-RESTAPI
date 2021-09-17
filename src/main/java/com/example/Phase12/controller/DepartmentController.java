@@ -1,12 +1,13 @@
 package com.example.Phase12.controller;
 
-import com.example.Phase12.commands.addDepartmentCommand;
+import com.example.Phase12.commands.department.addDepartmentCommand;
+import com.example.Phase12.dto.addDepartmentDto;
 import com.example.Phase12.exceptions.BadArgumentsException;
 import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.DepartmentRepository;
 import com.example.Phase12.sections.Department;
+import com.example.Phase12.sections.Employee;
 import com.example.Phase12.service.DepartmentService;
-import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class DepartmentController {
         this.departmentRepository = departmentRepository;
     }
 
-    @RequestMapping(value = "/adding")
-    public addDepartmentCommand savingDepartment(@RequestBody addDepartmentCommand departmentCommand){
+    @RequestMapping(value = "adding")
+    public addDepartmentDto savingDepartment(@RequestBody addDepartmentCommand departmentCommand){
 
 
         if(departmentRepository.existsById(departmentCommand.getId()))
@@ -39,13 +40,13 @@ public class DepartmentController {
         return departmentService.savingDepartment(departmentCommand);
     }
 
-    @RequestMapping(value = "/GetDep/{id}")
-    public Optional<Department> getDep(@PathVariable int id){
+    @RequestMapping(value = "GetDep/{id}")
+    public addDepartmentDto getDep(@PathVariable int id){
 
         if(!departmentRepository.existsById(id))
             throw new ResourceNotFoundException("The department with this id not found!");
-
-        return departmentService.getDepartment(id);
+        Department department = departmentRepository.findById(id).orElse(null);
+        return departmentService.getDepartment(department);
 
     }
     

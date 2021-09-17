@@ -17,11 +17,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
            "  from       employee\n" +
            "  where      manager_id = ?1 \n" +
            "  union all\n" +
-           "  select     p.id_employee, p.date_of_birth, p.gender, p.graduation_date, p.gross_salary, p.net_salary, p.department_id, p.manager_id, p.team_id \n" +
+           "  select     p.id_employee, p.date_of_birth, p.gender, p.graduation_date, p.gross_salary, p.net_salary, p.department_id, p.manager_id, p.team_id ,\n" +
            "           p.roles, p.username, p.password , p.active ,p.permissions ,p.second_name ,p.national_id ,p.joined_year ,p.degree_enum ,p.bonus ,p.raises ,p.years_of_experience\n" +
            "  from       employee p\n" +
-           "  inner join cte\n" +
-           "          on p.manager_id = cte.id_employee\n" +
+           "  inner join cte \n" +
+           "          on p.manager_id = id_employee\n" +
            ")\n" +
            "select * from cte;", nativeQuery = true)
     List<Employee> getEmployeesUnderManagerRecursively(int id);
