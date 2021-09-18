@@ -3,6 +3,7 @@
     <team id_team='1' team_name='asfalt'/>
     <department id="1" department_name="abc"/>
 
+
     <employee id_employee='1' joined_year="2020" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" second_name="lil" gender='Male' net_salary="800.6"
               gross_salary="67.7" department_id='1' team_id='1' active="1" bonus="466" raises="453" years_of_experience="100"
               permissions="gettingEmployees" password="$2a$10$v21ma/0iW089WQb17kg55.22L42JcQ94VIP0xkr38uBrXmhrDontC" username="safty" roles="USER" national_id="234" degree_enum="Fresh"/>
@@ -14,6 +15,8 @@
               permissions="gettingEmployees" password="$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy" username="spongBob" roles="HR" national_id="741"/>
 
     <Vacation id="1" employee_name="gogo" current_year="2021" exceeded_day="0" employee_id="1"/>
+
+    <earnings id="1" raises="32" bonus="22" date="2020-03-1" employee_id="1"/>
 
     <salary_details id="1" actual_salary="32" date="2020-03-1" employee_id="1"/>
     <salary_details id="2" actual_salary="4" date="2021-03-1" employee_id="1"/>

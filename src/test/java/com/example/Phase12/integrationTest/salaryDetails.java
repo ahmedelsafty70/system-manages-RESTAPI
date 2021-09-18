@@ -76,8 +76,22 @@ public class salaryDetails {
                 // .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .andExpect(status().isOk()).andExpect(content().json(JSONSalaryDetails));
 
+    }
+
+    @Test
+    public void getSalaryDetailsForbiddenException() throws Exception {
+
+        int employeeId =1;
+        List<SalaryDetails> salaryDetails = salaryDetailsRepository.salaryOfSpecificEmployee(employeeId);
+
+
+        String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetails);
+        mockMvc.perform(MockMvcRequestBuilders.get("/salaryController/getSalaryDetails/" + employeeId)
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
+                .andExpect(status().isForbidden());
 
     }
+
 
     @Test
     public void getSalaryDetailsNotFoundTesting() throws Exception {
@@ -97,14 +111,30 @@ public class salaryDetails {
 
         Date date = new Date(2020, 8, 5);
         Employee employee = employeeRepository.findById(1).orElse(null);
-        addSalaryDetailsCommand salaryDetailsCommand = new addSalaryDetailsCommand(2, 5000f, date, employee);
+        addSalaryDetailsCommand salaryDetailsCommand = new addSalaryDetailsCommand(3, 5000f, date, employee);
 
         String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetailsCommand);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/salaryController/addSalaryDetails")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONSalaryDetails))
-                .andExpect(status().isOk()).andExpect(status().isOk());
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @Transactional
+    public void addSalaryDetailsForbiddenException() throws Exception {
+
+        Date date = new Date(2020, 8, 5);
+        Employee employee = employeeRepository.findById(1).orElse(null);
+        addSalaryDetailsCommand salaryDetailsCommand = new addSalaryDetailsCommand(3, 5000f, date, employee);
+
+        String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetailsCommand);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/salaryController/addSalaryDetails")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
+                .contentType(MediaType.APPLICATION_JSON).content(JSONSalaryDetails))
+                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -126,7 +156,7 @@ public class salaryDetails {
     public void addSalaryDetailsActualSalaryInvalidTesting() throws Exception {
 
 
-        addSalaryDetailsCommandActualSalaryException salaryDetailsCommandActualSalaryException = new addSalaryDetailsCommandActualSalaryException(2, -45f);
+        addSalaryDetailsCommandActualSalaryException salaryDetailsCommandActualSalaryException = new addSalaryDetailsCommandActualSalaryException(3, -45f);
 
         String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetailsCommandActualSalaryException);
 
@@ -142,7 +172,7 @@ public class salaryDetails {
     public void addSalaryDetailsDateNotFoundTesting() throws Exception {
 
 
-        addSalaryDetailsCommandDateException salaryDetailsCommandDateException = new addSalaryDetailsCommandDateException(2, 1000f, null);
+        addSalaryDetailsCommandDateException salaryDetailsCommandDateException = new addSalaryDetailsCommandDateException(3, 1000f, null);
 
         String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetailsCommandDateException);
 
@@ -153,6 +183,5 @@ public class salaryDetails {
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
                 .andExpect(result -> Assertions.assertEquals("date is null!", result.getResolvedException().getMessage()));
     }
-
 
 }

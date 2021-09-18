@@ -77,6 +77,19 @@ public class Department {
         Assertions.assertEquals(departmentCommand.getName(), department.get().getName());
     }
     @Test
+    public void addDepartmentForbiddenException() throws Exception {
+
+
+        addDepartmentCommand departmentCommand = new addDepartmentCommand(45, "Computer");
+
+        String JSONDepartment = objectMapper.writeValueAsString(departmentCommand);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/departmentController/adding")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
+                .contentType(MediaType.APPLICATION_JSON).content(JSONDepartment))
+                .andExpect(status().isForbidden());
+    }
+    @Test
     public void addDepartmentAlreadyExistExceptionTesting() throws Exception {
 
 
@@ -124,6 +137,18 @@ public class Department {
         Assertions.assertEquals(team.get().getTeamName(),comparingTeam.get().getTeamName());
 
     }
+    @Test
+    public void getDepartmentForbiddenException() throws Exception{
+
+        Optional<Team> team = teamRepository.findById(1);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/departmentController/GetDep/1")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
+                .andExpect(status().isForbidden());
+
+
+    }
+
 
 
     @Test

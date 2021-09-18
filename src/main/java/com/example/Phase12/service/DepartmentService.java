@@ -3,23 +3,25 @@ package com.example.Phase12.service;
 import com.example.Phase12.commands.department.addDepartmentCommand;
 import com.example.Phase12.dto.addDepartmentDto;
 import com.example.Phase12.repository.DepartmentRepository;
+import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.sections.Department;
 import com.example.Phase12.sections.Employee;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class DepartmentService {
 
 
-    public DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
     private ModelMapper modelMapper;
+    private EmployeeRepository employeeRepository;
 
-    public DepartmentService(DepartmentRepository departmentRepository, ModelMapper modelMapper) {
+
+    public DepartmentService(DepartmentRepository departmentRepository, ModelMapper modelMapper, EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
         this.modelMapper = modelMapper;
+        this.employeeRepository = employeeRepository;
     }
 
     private Department mapToDepartment(addDepartmentCommand departmentCommand){

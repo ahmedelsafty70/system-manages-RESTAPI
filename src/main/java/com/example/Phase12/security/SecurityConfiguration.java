@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/HumanResources/employees/**").hasRole("HR")
-                .antMatchers("/departmentController/add").hasRole("HR")
+                .antMatchers("/departmentController/**").hasRole("HR")
                 .antMatchers("/departmentController/GetDep/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/teamController/adding").hasRole("HR")
                 .antMatchers("/teamController/gettingEmployeesUnderTeam/**").hasAnyRole("HR","MANAGER")
@@ -57,6 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/salaryController/getSalaryDetails/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/salaryController/addSalaryDetails").hasRole("HR")
                 .antMatchers("/HumanResources/notForHR/**").hasRole("USER")
+                .antMatchers("/HumanResources/Earning/get/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/HumanResources/Earning/add/**").hasRole("HR")
                 .and()
                 .httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

@@ -23,7 +23,7 @@ public class Earnings {
     private float raises;
 
     @Column(name="date")
-    private Date date;
+    private String date;
 
     @ManyToOne
     @JoinColumn(name="employee_id")

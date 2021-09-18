@@ -72,7 +72,25 @@ public class Vacation {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/VacationController/addVacation")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONVacation))
-                .andExpect(status().isOk()).andExpect(status().isOk()).andExpect(content().json(JSONVacation));
+                .andExpect(status().isOk()).andExpect(content().json(JSONVacation));
+
+    }
+
+    @Test
+    public void addingVacationForbiddenException() throws Exception {
+
+        com.example.Phase12.sections.Employee employee = employeeRepository.findById(1).orElse(null);
+
+
+
+        addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, employee); //##ASK AMIN for the employee
+
+        String JSONVacation = objectMapper.writeValueAsString(vacationCommand);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/VacationController/addVacation")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
+                .contentType(MediaType.APPLICATION_JSON).content(JSONVacation))
+                .andExpect(status().isForbidden());
 
     }
 
@@ -161,6 +179,20 @@ public class Vacation {
         Assertions.assertEquals(vacation.get().getId(), vacationResult.get().getId());
 
     }
+
+    @Test
+    public void gettingVacationForbiddenException() throws Exception {
+        Optional<com.example.Phase12.sections.Vacation> vacation = vacationRepository.findById(1);
+
+        String JSONVacation = objectMapper.writeValueAsString(vacation.get());
+        mockMvc.perform(MockMvcRequestBuilders.get("/VacationController/get/1")
+
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
+                .andExpect(status().isForbidden());
+
+    }
+
+
 
     @Test
     public void gettingVacationNotFoundTesting() throws Exception {

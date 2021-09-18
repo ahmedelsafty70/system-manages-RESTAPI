@@ -9,6 +9,7 @@ create table department
     id       integer AUTO_INCREMENT not null
         primary key,
     department_name varchar(255) null
+
 );
 
 create table employee

@@ -83,11 +83,23 @@ public class Team {
     }
 
     @Test
+    public void AddTeamForbiddenException() throws Exception {
+
+
+        addTeamCommand teamCommand = new addTeamCommand(2, "sa3ka");
+
+        String JSONTeam = objectMapper.writeValueAsString(teamCommand);
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/teamController/adding")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
+                .contentType(MediaType.APPLICATION_JSON).content(JSONTeam))
+                .andExpect(status().isForbidden());
+
+
+    }
+
+    @Test
     public void AddTeamAlreadyExistTesting() throws Exception {
 
-//        Team team1 = new Team();
-//        team1.setTeamName("tiko");
-//        team1.setIdTeam(1);
         addTeamCommandTeamIdException teamCommandTeamIdException = new addTeamCommandTeamIdException(1);
 
         String JSONTeam = objectMapper.writeValueAsString(teamCommandTeamIdException);
@@ -126,6 +138,15 @@ public class Team {
     }
 
     @Test
+    public void getTeamForbiddenException() throws Exception{
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/getTeam/1")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
     public void getTeamButTeamIdNotFound() throws Exception{
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/getTeam/4")
@@ -151,6 +172,20 @@ public class Team {
         Optional<com.example.Phase12.sections.Team> teamToCheckWith = teamRepository.findById(1);
         Assertions.assertEquals(team.get().getIdTeam(), teamToCheckWith.get().getIdTeam());
         Assertions.assertEquals(team.get().getTeamName(), teamToCheckWith.get().getTeamName());
+
+    }
+
+    @Test
+    public void getEmployeesInTeamsForbiddenException() throws Exception {
+
+        Optional<com.example.Phase12.sections.Team> team = teamRepository.findById(1);
+
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/gettingEmployeesUnderTeam/1")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(team.get().getIdTeam())))
+                .andExpect(status().isForbidden());
 
     }
 

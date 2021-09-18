@@ -20,9 +20,6 @@ public class Vacation { // TO CALCULATE HOW MANY DAYS EXCEEDED TO CALCULATE SALA
 
     @Column(name = "exceeded_day")
     private int exceeded_day;
-
-
-
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;

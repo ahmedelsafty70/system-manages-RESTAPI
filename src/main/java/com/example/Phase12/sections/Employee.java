@@ -42,8 +42,11 @@ import java.util.*;
     @Column(name = "graduationDate")
     private Date graduationDate;
 
-    @OneToMany(mappedBy="employee")
-    private List<Earnings> earnings ;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy="employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Earnings> ListOfEarnings ;
 
     @Column(name = "netSalary")
     private Float netSalary;
@@ -164,6 +167,14 @@ import java.util.*;
     public void setIdEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
+
+//    public List<Earnings> getListOfEarnings() {
+//        return ListOfEarnings;
+//    }
+//
+//    public void setListOfEarnings(List<Earnings> listOfEarnings) {
+//        ListOfEarnings = listOfEarnings;
+//    }
 
     public Date getDateOfBirth() {
         return dateOfBirth;
