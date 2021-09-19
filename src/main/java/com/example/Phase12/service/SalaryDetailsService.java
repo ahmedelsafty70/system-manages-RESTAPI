@@ -3,6 +3,8 @@ package com.example.Phase12.service;
 import com.example.Phase12.ModelMapperGen;
 import com.example.Phase12.commands.salaryDetails.addSalaryDetailsCommand;
 import com.example.Phase12.dto.addSalaryDetailsDto;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.repository.SalaryDetailsRepository;
 import com.example.Phase12.repository.VacationRepository;
@@ -45,7 +47,16 @@ public class SalaryDetailsService {
         return salaryDetails;
     }
 
-    public addSalaryDetailsDto savingSalaryDetails(addSalaryDetailsCommand salaryDetailsCommand){ // To Be Continued
+    public addSalaryDetailsDto savingSalaryDetails(addSalaryDetailsCommand salaryDetailsCommand){
+
+        if(salaryDetailsRepository.existsById(salaryDetailsCommand.getId()))
+            throw new BadArgumentsException("salary details with this id already exist!");
+
+        if(salaryDetailsCommand.getActualSalary() < 0)
+            throw new BadArgumentsException("actual salary cannot be less than zero!");
+
+        if(salaryDetailsCommand.getDate() == null)
+            throw new BadArgumentsException("date is null!");
 
         SalaryDetails salaryDetails = mapToSalaryDetails(salaryDetailsCommand);
 
@@ -57,6 +68,10 @@ public class SalaryDetailsService {
     }
 
     public List<addSalaryDetailsDto> gettingSalaryDetails(int id){
+
+        if(!salaryDetailsRepository.existsById(id))
+            throw new ResourceNotFoundException("salary details with this id isn't found!");
+
 
         List<SalaryDetails> salaryDetails = salaryDetailsRepository.salaryOfSpecificEmployee(id);
         List<addSalaryDetailsDto> salaryDetailsDto = new ArrayList<>();
@@ -71,8 +86,9 @@ public class SalaryDetailsService {
 
 
 
+
     @Transactional
-    @Scheduled(cron="0 0 0 25 * *") //each month
+    @Scheduled(cron = "0 0 0 25 * *") //each month
     public void generateSalaryAllEmployees() {
         List<Employee> Employees = employeeRepository.getAllEmployee();
 
@@ -81,17 +97,18 @@ public class SalaryDetailsService {
            SalaryDetails salaryDetails = new SalaryDetails();
 
            Date date = Date.valueOf(LocalDate.now());
+           int year = date.getYear()+1900;
 
-           salaryDetails.setDate(date);
+//           salaryDetails.setDate(date);
+//
+//           String formattedDate = String.format("yyyy/MM", date);
+//
+//           String[] arrayOfYearsAndMonths = formattedDate.split("/");
 
-           String formattedDate = String.format("yyyy/MM", date);
 
-           String[] arrayOfYearsAndMonths = formattedDate.split("/");
+          // int yearInInteger = Integer.parseInt(arrayOfYearsAndMonths[0]);
 
-
-           int yearInInteger = Integer.parseInt(arrayOfYearsAndMonths[0]);
-
-           int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),yearInInteger);
+           int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),year);
 
            double calculatingNetSalary = employee.getGrossSalary() + employee.getBonus() + employee.getRaises()
                                             - ConstantsDeduction.insurance - (noOfDaysExceeded * (employee.getGrossSalary()/22));
@@ -102,10 +119,14 @@ public class SalaryDetailsService {
 
 
            salaryDetails.setActualSalary((float)(calculatingNetSalary - (calculatingNetSalary * ConstantsDeduction.taxes)));
-
+           salaryDetails.setDate(date);
            salaryDetails.setEmployee(employee);
 
+           vacationRepository.resetExceededCounter(employee.getIdEmployee(),year);
+
            salaryDetailsRepository.save(salaryDetails);
+           employeeRepository.save(employee);
+
        }
     }
 }

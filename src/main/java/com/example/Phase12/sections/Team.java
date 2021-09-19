@@ -2,12 +2,17 @@ package com.example.Phase12.sections;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name ="team")
+
+@Getter@Setter@NoArgsConstructor
 public class Team {
 
     @Id
@@ -21,8 +26,6 @@ public class Team {
     @OneToMany(mappedBy = "team",fetch = FetchType.EAGER)
     private List<Employee> employees;
 
-    public Team() {
-    }
 
     public Team(int idTeam, String teamName, List<Employee> employees) {
         this.idTeam = idTeam;
@@ -30,27 +33,4 @@ public class Team {
         this.employees = employees;
     }
 
-    public int getIdTeam() {
-        return idTeam;
-    }
-
-    public void setIdTeam(int idTeam) {
-        this.idTeam = idTeam;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
 }

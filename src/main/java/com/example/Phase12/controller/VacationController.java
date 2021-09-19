@@ -29,20 +29,6 @@ public class VacationController {
     @PostMapping(value = "addVacation",produces= MediaType.APPLICATION_JSON_VALUE)
     public addVacationDto addVacation(@RequestBody addVacationCommand vacationCommand)throws Exception{
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
-        LocalDateTime now = LocalDateTime.now();
-
-        if(vacationRepository.existsById(vacationCommand.getId()))
-            throw new BadArgumentsException("vacation with this id is added before!");
-
-        if(vacationCommand.getEmployee_name() == null)
-            throw new ResourceNotFoundException("The name of the employee is null!");
-
-        if(vacationCommand.getCurrentYear() > Integer.parseInt(dtf.format(now)))
-            throw new ResourceNotFoundException("This year is invalid! This year didn't come yet.");
-
-        if(vacationCommand.getCurrentYear() < vacationCommand.getEmployee().getJoined_year())
-             throw new ResourceNotFoundException("This year is invalid! choose a year after you joined our community.");
 
 
         return vacationService.savingVacation(vacationCommand);
@@ -51,8 +37,6 @@ public class VacationController {
     @GetMapping(value = "get/{id}")
     public addVacationDto getVacation(@PathVariable int id){
 
-        if(!vacationRepository.existsById(id))
-            throw new ResourceNotFoundException("vacation with this id doesn't exist!");
 
         return vacationService.gettingVacation(id);
     }

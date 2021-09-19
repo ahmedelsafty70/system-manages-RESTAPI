@@ -13,7 +13,10 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,27 +38,35 @@ public class QuartzTest {
 
 
 	public static void main(String[] args) throws SchedulerException {
+
+
 		SpringApplication.run(QuartzTest.class, args);
 
 
-		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+//		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+//
+//		scheduler.start();
+//
+//		JobDetail job = newJob(salaryUpdateJob.class)
+//				.withIdentity("bank-transfer")
+//				.build();
+//
+//		SimpleTrigger trigger = newTrigger().withIdentity("trigger")
+//				.startNow()
+//				.withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever())
+//				.build();
+//
+//		scheduler.scheduleJob(job, trigger);
 
-		scheduler.start();
-
-		JobDetail job = newJob(salaryUpdateJob.class)
-				.withIdentity("bank-transfer")
-				.build();
-
-		SimpleTrigger trigger = newTrigger().withIdentity("trigger")
-				.startNow()
-				.withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever())
-				.build();
-
-		scheduler.scheduleJob(job, trigger);
+	}
+	@Configuration
+	@ConditionalOnProperty(value = "scheduling.enabled", havingValue = "true", matchIfMissing = true)
+	@EnableScheduling
+	public class SchedulingConfiguration {
 
 	}
 
-	public static class salaryUpdateJob implements Job {
+//	public static class salaryUpdateJob implements Job {
 //
 //		private EmployeeRepository employeeRepository;
 //		private VacationRepository vacationRepository;
@@ -65,43 +76,43 @@ public class QuartzTest {
 //			this.vacationRepository = vacationRepository;
 //		}
 
-		@Override
-		public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
-//				Employee employee = Employee(1,"ahmed", )
+//		@Override
+//		public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 //
-//				for (Employee employee : Employees)
-//				{
-//					SalaryDetails salaryDetails = new SalaryDetails();
-//
-//					Date date = Date.valueOf(LocalDate.now());
-//
-//					salaryDetails.setDate(date);
-//
-//					String formattedDate = String.format("yyyy/MM", date);
-//
-//					String[] arrayOfYearsAndMonths = formattedDate.split("/");
-//
-//
-//					int yearInInteger = Integer.parseInt(arrayOfYearsAndMonths[0]);
-//
-//					int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),yearInInteger);
-//
-//					double calculatingNetSalary = employee.getGrossSalary() + employee.getBonus() + employee.getRaises()
-//							- ConstantsDeduction.insurance - (noOfDaysExceeded * (employee.getGrossSalary()/22));
-//
-//					employee.setBonus(0D);
-//					employee.setRaises(0D);
-//
-//
-//					salaryDetails.setActualSalary((float)(calculatingNetSalary - (calculatingNetSalary * ConstantsDeduction.taxes)));
-//
-//					salaryDetails.setEmployee(employee);
-//
-//					System.out.println("hiiiiiiiiiiiiiiiiiiii");
-//				}
-//			}
+////				Employee employee = Employee(1,"ahmed", )
+////
+////				for (Employee employee : Employees)
+////				{
+////					SalaryDetails salaryDetails = new SalaryDetails();
+////
+////					Date date = Date.valueOf(LocalDate.now());
+////
+////					salaryDetails.setDate(date);
+////
+////					String formattedDate = String.format("yyyy/MM", date);
+////
+////					String[] arrayOfYearsAndMonths = formattedDate.split("/");
+////
+////
+////					int yearInInteger = Integer.parseInt(arrayOfYearsAndMonths[0]);
+////
+////					int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),yearInInteger);
+////
+////					double calculatingNetSalary = employee.getGrossSalary() + employee.getBonus() + employee.getRaises()
+////							- ConstantsDeduction.insurance - (noOfDaysExceeded * (employee.getGrossSalary()/22));
+////
+////					employee.setBonus(0D);
+////					employee.setRaises(0D);
+////
+////
+////					salaryDetails.setActualSalary((float)(calculatingNetSalary - (calculatingNetSalary * ConstantsDeduction.taxes)));
+////
+////					salaryDetails.setEmployee(employee);
+////
+////					System.out.println("hiiiiiiiiiiiiiiiiiiii");
+////				}
+////			}
+////		}
 //		}
-		}
 	}
-}
+

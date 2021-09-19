@@ -2,6 +2,8 @@ package com.example.Phase12.service;
 
 import com.example.Phase12.commands.department.addDepartmentCommand;
 import com.example.Phase12.dto.addDepartmentDto;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.DepartmentRepository;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.sections.Department;
@@ -32,6 +34,11 @@ public class DepartmentService {
 
     public addDepartmentDto savingDepartment(addDepartmentCommand departmentCommand) {
 
+        if(departmentRepository.existsById(departmentCommand.getId()))
+            throw new BadArgumentsException("department with this id is added before!");
+        if(departmentCommand.getName() == null)
+            throw new ResourceNotFoundException("The name is null!");
+
         Department department = mapToDepartment(departmentCommand);
 
         Department departmentSaved = departmentRepository.save(department);
@@ -48,9 +55,11 @@ public class DepartmentService {
     }
 
 
-    public addDepartmentDto getDepartment(Department department){
+    public addDepartmentDto getDepartment(int id){
+        if(!departmentRepository.existsById(id))
+            throw new ResourceNotFoundException("The department with this id not found!");
 
-       //  Department department = departmentRepository.findById(id).orElse(null);
+         Department department = departmentRepository.findById(id).orElse(null);
 
          addDepartmentDto departmentDto = mapToDepartmentDto(department);
          return departmentDto;

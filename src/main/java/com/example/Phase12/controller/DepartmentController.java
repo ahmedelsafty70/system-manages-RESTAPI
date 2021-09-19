@@ -31,22 +31,13 @@ public class DepartmentController {
     @RequestMapping(value = "adding")
     public addDepartmentDto savingDepartment(@RequestBody addDepartmentCommand departmentCommand){
 
-
-        if(departmentRepository.existsById(departmentCommand.getId()))
-            throw new BadArgumentsException("department with this id is added before!");
-        if(departmentCommand.getName() == null)
-            throw new ResourceNotFoundException("The name is null!");
-
         return departmentService.savingDepartment(departmentCommand);
     }
 
     @RequestMapping(value = "GetDep/{id}")
     public addDepartmentDto getDep(@PathVariable int id){
 
-        if(!departmentRepository.existsById(id))
-            throw new ResourceNotFoundException("The department with this id not found!");
-        Department department = departmentRepository.findById(id).orElse(null);
-        return departmentService.getDepartment(department);
+        return departmentService.getDepartment(id);
 
     }
     

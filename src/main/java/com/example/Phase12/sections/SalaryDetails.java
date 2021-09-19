@@ -2,14 +2,20 @@ package com.example.Phase12.sections;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table
+
+@Getter@Setter@NoArgsConstructor
 public class SalaryDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 
@@ -25,35 +31,5 @@ public class SalaryDetails {
     private Employee employee;
 
 
-    public Float getActualSalary() {
-        return actualSalary;
-    }
 
-    public void setActualSalary(Float actualSalary) {
-        this.actualSalary = actualSalary;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 }

@@ -2,6 +2,8 @@ package com.example.Phase12.service;
 
 import com.example.Phase12.commands.team.addTeamCommand;
 import com.example.Phase12.dto.addTeamDto;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.TeamRepository;
 import com.example.Phase12.sections.Employee;
 import com.example.Phase12.sections.Team;
@@ -26,6 +28,11 @@ public class TeamService {
 
     public addTeamDto savingTeam(addTeamCommand teamCommand){
 
+        if(teamRepository.existsById(teamCommand.getIdTeam()))
+            throw new BadArgumentsException("team with this id is added before!");
+        if(teamCommand.getTeamName() == null)
+            throw new ResourceNotFoundException("The name is null!");
+
         Team team = mapToTeam(teamCommand);
 
         Team teamToBeChanged = teamRepository.save(team);
@@ -46,8 +53,11 @@ public class TeamService {
         return teamDto;
     }
 
-    public addTeamDto getTeam(int id)
-    {
+    public addTeamDto getTeam(int id) {
+        if(!teamRepository.existsById(id))
+            throw new ResourceNotFoundException("team with this id is not found!");
+
+
         Team team = teamRepository.findById(id).orElse(null);
 
         addTeamDto teamDto = mapToTeamCommand(team);
@@ -55,6 +65,9 @@ public class TeamService {
         return teamDto;
     }
     public List<Employee> EmployeesUnderTeam(int id) {
+        if(!teamRepository.existsById(id))
+            throw new ResourceNotFoundException("team with this id is not found!");
+
         Optional<Team> team = teamRepository.findById(id);
         return team.get().getEmployees();
     }

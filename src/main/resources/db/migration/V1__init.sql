@@ -69,6 +69,7 @@ create table Earnings
     bonus     double null,
     date      DATE null,
     employee_id int null,
+    deduction_of_exceeded_day Double null,
 
     constraint earnings_employee_employeeId_fk
         foreign key (employee_id) references   employee  (id_employee)

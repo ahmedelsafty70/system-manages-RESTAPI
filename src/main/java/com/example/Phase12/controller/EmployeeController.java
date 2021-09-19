@@ -34,31 +34,6 @@ public class EmployeeController extends BaseController {
     @PostMapping(value="add",produces=MediaType.APPLICATION_JSON_VALUE)
     public addEmployeeDto addingUser(@RequestBody addEmployeeCommand employee) throws Exception {
 
-        if(employeeRepository.existsById(employee.getIdEmployee()))
-            throw new BadArgumentsException("employee with this id is added before!");
-        if(employee.getSecond_name() == null )
-            throw new ResourceNotFoundException("The second_name is null");
-        if(employee.getNational_id() == null)
-            throw new ResourceNotFoundException("The national_id is null");
-        if(Integer.parseInt(employee.getNational_id()) < 0)
-            throw new BadArgumentsException("INVALID national-id");
-        if(employee.getGrossSalary() == null)
-            throw new ResourceNotFoundException("The gross salary is null");
-        if(employee.getActive() == null)
-            throw new ResourceNotFoundException("Employee.getActive is null");
-        if(employee.getUsername() == null)
-            throw new ResourceNotFoundException("Employee.username is null");
-        if(employee.getPassword() == null)
-            throw new ResourceNotFoundException("Employee.password is null");
-        if(employee.getYearsOfExperience() == null)
-            throw new ResourceNotFoundException("Employee.years_of_experience is null");
-        if(employee.getRoles() == null)
-            throw new ResourceNotFoundException("Employee.roles is null");
-
-        if(Integer.parseInt(employee.getNational_id()) < 0)
-            throw new BadArgumentsException("INVALID national-id");
-
-
         return employeeService.savingEmployee(employee);
 
     }
@@ -66,36 +41,19 @@ public class EmployeeController extends BaseController {
     @PutMapping(value = {"updating/{id}"})
     public addEmployeeDto setEmployeeService(@RequestBody addEmployeeCommand employeeCommand, @PathVariable int id) throws Exception {
 
-        if(!employeeRepository.existsById(id))
-            throw new ResourceNotFoundException("employee with this id is not found!");
-
-
         return employeeService.modifyUser(employeeCommand,id);
     }
 
     @DeleteMapping(value = "deleting/{id}")
     public void deleteEmployee(@PathVariable int id) throws Exception {
 
-        if(!employeeRepository.existsById(id))
-            throw new ResourceNotFoundException("employee with this id is not found!");
-
-        Optional<Employee> employee = employeeService.getUser(id);
-        if(employee.get().getManager() != null  && employee.get().getListOfEmployees() != null)
-        {
-            employeeService.ReplacingEmployeesToAnotherManager(employee);
-            employeeService.deleteEmployee(id);
-        }
-        else
-        {
-            throw new Exception("can't delete employee with no manager!");
-        }
+        employeeService.deleteEmployee(id);
 
     }
 
     @RequestMapping(value = "gettingEmployeesRecursively/{id}")
     public List<Employee> getEmployeesUnderManagerRecursively(@PathVariable int id){
-        if(!employeeRepository.existsById(id))
-            throw new ResourceNotFoundException("The manager with this id not found!");
+
         return employeeService.getEmployeesUnderManagerRecursively(id);
     }
 
@@ -127,8 +85,7 @@ public class EmployeeController extends BaseController {
     @GetMapping(value = "gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas
         public List<Employee> EmployeesManager(@PathVariable int id){
 
-        if(!employeeRepository.existsById(id))
-            throw new ResourceNotFoundException("manager with this id is not found!");
+
 
         return employeeService.ReturningList(id);
         }

@@ -2,6 +2,8 @@ package com.example.Phase12.service;
 
 import com.example.Phase12.commands.employee.addEmployeeCommand;
 import com.example.Phase12.dto.addEmployeeDto;
+import com.example.Phase12.exceptions.BadArgumentsException;
+import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.sections.ConstantsDeduction;
 import com.example.Phase12.sections.Employee;
@@ -42,6 +44,30 @@ public class EmployeeService extends BaseController {
 
     public addEmployeeDto savingEmployee(addEmployeeCommand addEmployeeCommand) throws Exception {
 
+        if(employeeRepository.existsById(addEmployeeCommand.getIdEmployee()))
+            throw new BadArgumentsException("employee with this id is added before!");
+        if(addEmployeeCommand.getSecond_name() == null )
+            throw new ResourceNotFoundException("The second_name is null");
+        if(addEmployeeCommand.getNational_id() == null)
+            throw new ResourceNotFoundException("The national_id is null");
+        if(parseInt(addEmployeeCommand.getNational_id()) < 0)
+            throw new BadArgumentsException("INVALID national-id");
+        if(addEmployeeCommand.getGrossSalary() == null)
+            throw new ResourceNotFoundException("The gross salary is null");
+        if(addEmployeeCommand.getActive() == null)
+            throw new ResourceNotFoundException("Employee.getActive is null");
+        if(addEmployeeCommand.getUsername() == null)
+            throw new ResourceNotFoundException("Employee.username is null");
+        if(addEmployeeCommand.getPassword() == null)
+            throw new ResourceNotFoundException("Employee.password is null");
+        if(addEmployeeCommand.getYearsOfExperience() == null)
+            throw new ResourceNotFoundException("Employee.years_of_experience is null");
+        if(addEmployeeCommand.getRoles() == null)
+            throw new ResourceNotFoundException("Employee.roles is null");
+
+        if(parseInt(addEmployeeCommand.getNational_id()) < 0)
+            throw new BadArgumentsException("INVALID national-id");
+
         Employee employee = mapToEmployee(addEmployeeCommand);
 
         addEmployeeDto employeeDto = mapToEmployeeDto(employeeRepository.save(employee));
@@ -71,6 +97,10 @@ public class EmployeeService extends BaseController {
 
     public addEmployeeDto modifyUser(addEmployeeCommand employeeModifiedData, Integer id) throws Exception {
 
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("employee with this id is not found!");
+
+
         Employee empToModify = employeeRepository.findById(id).orElse(null);
         if (empToModify == null)
             return null;
@@ -86,7 +116,22 @@ public class EmployeeService extends BaseController {
     }
 
 
-    public void deleteEmployee(int id) {
+    public void deleteEmployee(int id) throws Exception {
+
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("employee with this id is not found!");
+
+        Optional<Employee> employee = getUser(id);
+        if(employee.get().getManager() != null  && employee.get().getListOfEmployees() != null)
+        {
+            ReplacingEmployeesToAnotherManager(employee);
+
+        }
+        else
+        {
+            throw new Exception("can't delete employee with no manager!");
+        }
+
         employeeRepository.deleteById(id);
     }
 
@@ -118,10 +163,6 @@ public class EmployeeService extends BaseController {
 //    }
     public EmployeeDTO gettingSalaries(Employee employee) throws NotFoundException {
 
-
-       // Employee employee = getUser(id).isPresent() ? getUser(id).get() : null;
-        //Employee employee = findByUser(getCurrentUser().getUsername());
-
         double calculatingNetSalary = employee.getNetSalary();
         employee.setGrossSalary((float) deductGrossSalary(calculatingNetSalary));
         EmployeeDTO newEmployee = EmployeeDTO.EmployeeDEOFunc(employee);
@@ -130,16 +171,18 @@ public class EmployeeService extends BaseController {
     }
 
     public List<Employee> ReturningList(int id) {
+
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("manager with this id is not found!");
         Optional<Employee> employee = employeeRepository.findById(id);
 
-        //assert employee != null;
         return employee.get().getListOfEmployees();
     }
 
 
     public addEmployeeDto GettingInfo(Employee employee) throws Exception {
 
-     //   Employee employee = employeeRepository.findById(id).orElse(null);
+
         addEmployeeDto employeeDto = mapToEmployeeDto(employee);
 
         return employeeDto;
@@ -152,6 +195,9 @@ public class EmployeeService extends BaseController {
     }
 
     public List<Employee> getEmployeesUnderManagerRecursively(int id) {
+
+        if(!employeeRepository.existsById(id))
+            throw new ResourceNotFoundException("The manager with this id not found!");
 
         Employee employee = employeeRepository.findById(id).orElse(null);
         List<Employee> ret = new ArrayList<>();

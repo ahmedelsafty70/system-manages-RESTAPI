@@ -28,26 +28,13 @@ public class SalaryDetailsController {
     @PostMapping(value = "addSalaryDetails",produces= MediaType.APPLICATION_JSON_VALUE)
     public addSalaryDetailsDto addSalaryDetails(@RequestBody addSalaryDetailsCommand salaryDetailsCommand)throws Exception{
 
-        if(salaryDetailsRepository.existsById(salaryDetailsCommand.getId()))
-            throw new BadArgumentsException("salary details with this id already exist!");
-
-        if(salaryDetailsCommand.getActualSalary() < 0)
-            throw new BadArgumentsException("actual salary cannot be less than zero!");
-
-        if(salaryDetailsCommand.getDate() == null)
-            throw new BadArgumentsException("date is null!");
-
         return salaryDetailsService.savingSalaryDetails(salaryDetailsCommand);
     }
 
     @GetMapping(value = "getSalaryDetails/{employeeId}")
     public List<addSalaryDetailsDto> getSalaryDetails(@PathVariable int employeeId){
 
-        if(!salaryDetailsRepository.existsById(employeeId))
-            throw new ResourceNotFoundException("salary details with this id isn't found!");
-
         return salaryDetailsService.gettingSalaryDetails(employeeId);
     }
-
 
 }

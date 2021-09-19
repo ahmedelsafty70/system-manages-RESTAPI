@@ -1,0 +1,4115 @@
+{
+	"info": {
+		"_postman_id": "20b31ba1-379f-4931-ba72-e885e4e15a5f",
+		"name": "SpringBoot-Phase2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Employee",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"18\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"1810525954\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\",\r\n    \"degreeEnum\" : \"Senior\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Second Name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"10\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"1810525954\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"grossSalary\" : \"5.2\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null National_Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The national_id is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Invalid National_Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The national_id is null', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"-3052\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Gross Salary",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"1705\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"30952\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Active",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"3052\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Username",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Employee.username is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"3052\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Employee.password is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"3052\",\r\n    \"username\" : \"ay7aga\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null YearOfExperience",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Employee.years_of_experience is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"3052\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Null Role",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"105\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"national_id\" : \"3052\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"degreeEnum\" : \"Senior\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The second_name is null', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEmployee\" : \"18\",\r\n    \"second_name\" : \"mohamed\",\r\n    \"roles\" : \"HR\",\r\n    \"national_id\" : \"1810525954\",\r\n    \"username\" : \"ay7aga\",\r\n    \"password\" : \"$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy\",\r\n    \"active\" : \"1\",\r\n    \"yearsOfExperience\" : \"52\",\r\n    \"grossSalary\" : \"5.2\",\r\n    \"gender\" : \"Male\",\r\n    \"degreeEnum\" : \"Senior\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"add"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Department",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"47\",\r\n    \"name\" : \"Computer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/departmentController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but Id already exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"1\",\r\n    \"name\" : \"Computer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/departmentController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but department Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/departmentController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"47\",\r\n    \"name\" : \"Computer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/departmentController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Team",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idTeam\" : \"2\",\r\n    \"teamName\" : \"sa3ka\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/teamController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but team id already exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idTeam\" : \"1\",\r\n    \"teamName\" : \"sa3ka\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/teamController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but name Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idTeam\" : \"6\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/teamController/adding",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"adding"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Vacation",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('add vacation!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"24\",\r\n    \"employee_name\" : \"1113WE\",\r\n    \"year\" : \"2021\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Id already exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('vacation with this id is added before!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but name Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('The name of the employee is null!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add but year invalid didn't come yet",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('This year is invalid! This year didnot come yet', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"8\",\r\n    \"employee_name\" : \"sasa\",\r\n    \"year\" : \"2029\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add year entered before joined year",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('This year is invalid! This year didnot come yet', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"8\",\r\n    \"employee_name\" : \"sasa\",\r\n    \"year\" : \"2019\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('add vacation!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"24\",\r\n    \"employee_name\" : \"1113WE\",\r\n    \"year\" : \"2021\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/VacationController/addVacation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"addVacation"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "salaryDetails",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\",\r\n    \"actualSalary\" : \"5000\",\r\n    \"date\" :\"2020-03-12\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add with existing Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('salary details with this id already exist!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"1\",\r\n    \"actualSalary\" : \"5000\",\r\n    \"date\" :\"2020-03-12\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add with invalid Actual Salary less than zero",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('actual salary cannot be less than zero!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\",\r\n    \"actualSalary\" : \"-500\",\r\n    \"date\" :\"2020-03-12\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add with date Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('date is null!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\",\r\n    \"actualSalary\" : \"-500\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\",\r\n    \"actualSalary\" : \"5000\",\r\n    \"date\" :\"2020-03-12\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"7\",\r\n    \"actualSalary\" : \"5000\",\r\n    \"date\" :\"2020-03-12\",\r\n    \"employee\":{\r\n    \"idEmployee\": \"1\",\r\n    \"joined_year\": \"2020\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/salaryController/addSalaryDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"addSalaryDetails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "earning",
+					"item": [
+						{
+							"name": "add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bonus\" : \"32\",\r\n    \"raises\" : \"11\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/Earning/add/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"Earning",
+										"add",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addUselessRequest",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bonus\" : \"0\",\r\n    \"raises\" : \"0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/Earning/add/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"Earning",
+										"add",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bonus\" : \"32\",\r\n    \"raises\" : \"11\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/Earning/add/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"Earning",
+										"add",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Employee",
+					"item": [
+						{
+							"name": "delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('deleting employee', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/deleting/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"deleting",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/deleting/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"deleting",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('deleting employee', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/deleting/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"deleting",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"item": [
+				{
+					"name": "Employee",
+					"item": [
+						{
+							"name": "get info by HR",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('getting employee', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployee/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployee",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get info each for himself",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('each employee getting his info', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingEmployee",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingEmployee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingEmployee",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingEmployee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "signing in is invalid by HR getting others info",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('each employee getting his info', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "sasa",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployee/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployee",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "singing in is invalid by Employee getting his info",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "sasa",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingEmployee",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingEmployee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary for himself",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('esalary with this username is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingSalary",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingSalary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary by HR",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingSalary/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingSalary",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary by HR but Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingSalary/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingSalary",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary for himself but wasn't authenticated",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('salary with this username is not found!', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "sasa",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingSalary",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingSalary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary by HR but wasn't authenticated",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "sasa",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingSalary/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingSalary",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employees under the manager!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/gettingEmployeesUnderTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"gettingEmployeesUnderTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager but Id not found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/gettingEmployeesUnderTeam/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"gettingEmployeesUnderTeam",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager recursively",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employees under the manager recursivly!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployeesRecursively/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployeesRecursively",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager recursively but id Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employees under the manager recursivly!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployeesRecursively/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployeesRecursively",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get info each for himself Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('each employee getting his info', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingEmployee",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingEmployee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get info by HR Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('getting employee', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployee/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployee",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary for himself Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('esalary with this username is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/notForHR/gettingSalary",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"notForHR",
+										"gettingSalary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get salary by HR Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingSalary/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingSalary",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager Forbidden Exception ",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employees under the manager!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/gettingEmployeesUnderTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"gettingEmployeesUnderTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees under manager recursively Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employees under the manager recursivly!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingEmployeesRecursively/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingEmployeesRecursively",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Department",
+					"item": [
+						{
+							"name": "get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/departmentController/GetDep/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"GetDep",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get but department Id Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/departmentController/GetDep/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"GetDep",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/departmentController/GetDep/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departmentController",
+										"GetDep",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Team",
+					"item": [
+						{
+							"name": "get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/getTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"getTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get team that Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/getTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"getTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees in the team",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/gettingEmployeesUnderTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"gettingEmployeesUnderTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employees team but with id Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/gettingUnderEmployees/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"gettingUnderEmployees",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/getTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"getTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get employee in team Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/teamController/gettingEmployeesUnderTeam/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teamController",
+										"gettingEmployeesUnderTeam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Vacation",
+					"item": [
+						{
+							"name": "get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/VacationController/get/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"get",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Id Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('vacation with this id doesnot exist!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/VacationController/get/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"get",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/VacationController/get/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"VacationController",
+										"get",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "salaryDetails",
+					"item": [
+						{
+							"name": "get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('get salary details!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/salaryController/getSalaryDetails/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"getSalaryDetails",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Id Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('get salary details!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/salaryController/getSalaryDetails/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"getSalaryDetails",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('get salary details!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/salaryController/getSalaryDetails/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"salaryController",
+										"getSalaryDetails",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Earning",
+					"item": [
+						{
+							"name": "get Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/Earning/get/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"Earning",
+										"get",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Put",
+			"item": [
+				{
+					"name": "Employee",
+					"item": [
+						{
+							"name": "update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"second_name\" : \"salwa\",\r\n    \"roles\" : \"HR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/updating/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"updating",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating Employee Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "spongBob",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "hr123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"second_name\" : \"salwa\",\r\n    \"roles\" : \"HR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/updating/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"updating",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Forbidden Exception",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('employee with this id is not found!', function(){\r",
+											"    pm.response.to.have.status(403)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "safty123",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "safty",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"second_name\" : \"salwa\",\r\n    \"roles\" : \"HR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/HumanResources/employees/updating/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"HumanResources",
+										"employees",
+										"updating",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

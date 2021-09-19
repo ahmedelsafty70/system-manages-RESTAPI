@@ -25,6 +25,9 @@ public class Earnings {
     @Column(name="date")
     private String date;
 
+    @Column(name = "deduction_of_exceeded_day")
+    private Double deductionOfExceededDay;
+
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;

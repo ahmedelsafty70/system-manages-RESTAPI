@@ -30,10 +30,7 @@ public class TeamController {
     @RequestMapping(value = "adding")
     public addTeamDto savingTeam(@RequestBody addTeamCommand teamCommand){
 
-        if(teamRepository.existsById(teamCommand.getIdTeam()))
-            throw new BadArgumentsException("team with this id is added before!");
-        if(teamCommand.getTeamName() == null)
-            throw new ResourceNotFoundException("The name is null!");
+
 
         return teamService.savingTeam(teamCommand);
     }
@@ -41,16 +38,12 @@ public class TeamController {
     @GetMapping(value = "getTeam/{id}")
     public addTeamDto getTeam(@PathVariable int id){
 
-        if(!teamRepository.existsById(id))
-            throw new ResourceNotFoundException("team with this id is not found!");
 
         return teamService.getTeam(id);
     }
     @GetMapping(value = "gettingEmployeesUnderTeam/{id}")
     public List<Employee> getEmployeesInTeam(@PathVariable int id) throws NotFoundException{
 
-        if(!teamRepository.existsById(id))
-            throw new ResourceNotFoundException("team with this id is not found!");
 
 
         return teamService.EmployeesUnderTeam(id);

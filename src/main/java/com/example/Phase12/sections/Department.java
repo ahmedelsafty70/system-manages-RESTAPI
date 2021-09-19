@@ -3,12 +3,17 @@ package com.example.Phase12.sections;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
+
+@Getter@Setter@NoArgsConstructor
 public class Department {
     @Id
     @Column(name = "id")
@@ -20,36 +25,10 @@ public class Department {
     @OneToMany(mappedBy = "department",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
         private List<Employee> employees;
 
-    public Department() {
-    }
-
     public Department(int id, String name, List<Employee> employees) {
         this.id = id;
         this.name = name;
         this.employees = employees;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
 }

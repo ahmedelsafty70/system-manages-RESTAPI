@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.config.CronTask;
+import org.springframework.scheduling.config.ScheduledTask;
+import org.springframework.scheduling.config.ScheduledTaskHolder;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
@@ -35,7 +38,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,6 +66,9 @@ public class salaryDetails {
 
     @Autowired
     private SalaryDetailsRepository salaryDetailsRepository;
+
+    @Autowired
+    private ScheduledTaskHolder scheduledTaskHolder;
 
     @Test
     public void getSalaryDetails() throws Exception {
@@ -182,6 +190,18 @@ public class salaryDetails {
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
                 .andExpect(result -> Assertions.assertEquals("date is null!", result.getResolvedException().getMessage()));
+    }
+
+    @Test
+    public void testMonthlyCronTaskScheduled() {
+        Set<ScheduledTask> scheduledTasks = scheduledTaskHolder.getScheduledTasks();
+        scheduledTasks.forEach(scheduledTask -> scheduledTask.getTask().getRunnable().getClass().getDeclaredMethods());
+        long count = scheduledTasks.stream()
+                .filter(scheduledTask -> scheduledTask.getTask() instanceof CronTask)
+                .map(scheduledTask -> (CronTask) scheduledTask.getTask())
+                .filter(cronTask -> cronTask.getExpression().equals("0 0 0 25 * *") && cronTask.toString().equals("com.example.Phase12.service.SalaryDetailsService.generateSalaryAllEmployees"))
+                .count();
+        assertThat(count).isEqualTo(1L);
     }
 
 }
