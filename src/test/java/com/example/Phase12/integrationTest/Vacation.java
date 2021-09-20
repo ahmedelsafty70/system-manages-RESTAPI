@@ -149,7 +149,7 @@ public class Vacation {
     public void addingVacationYearBeforeJoiningInvalidTesting() throws Exception {
 
 
-        Optional<Employee> employee = employeeRepository.findById(1);
+        Employee employee = employeeRepository.findById(1).orElse(null);
         addVacationCommandYearBeforeJoiningException vacationCommandYearException = new addVacationCommandYearBeforeJoiningException(5, "sasa", 199, employee); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommandYearException);

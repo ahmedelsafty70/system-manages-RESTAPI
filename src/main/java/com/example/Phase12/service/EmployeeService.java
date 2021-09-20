@@ -199,19 +199,19 @@ public class EmployeeService extends BaseController {
         if(!employeeRepository.existsById(id))
             throw new ResourceNotFoundException("The manager with this id not found!");
 
-        Employee employee = employeeRepository.findById(id).orElse(null);
-        List<Employee> ret = new ArrayList<>();
-        if(employee!=null){
-            if(employee.getListOfEmployees()==null) return ret;
-            for(var emp : employee.getListOfEmployees())
-            {
-                ret.add(emp);
-                ret.addAll(getEmployeesUnderManagerRecursively(emp.getIdEmployee()));
-            }
-        }
-
-        return ret;
-        //return employeeRepository.getEmployeesUnderManagerRecursively(id);
+//        Employee employee = employeeRepository.findById(id).orElse(null);
+//        List<Employee> ret = new ArrayList<>();
+//        if(employee!=null){
+//            if(employee.getListOfEmployees()==null) return ret;
+//            for(var emp : employee.getListOfEmployees())
+//            {
+//                ret.add(emp);
+//                ret.addAll(getEmployeesUnderManagerRecursively(emp.getIdEmployee()));
+//            }
+//        }
+//
+//        return ret;
+        return employeeRepository.getEmployeesUnderManagerRecursively(id);
     }
 
 

@@ -13,10 +13,10 @@ public class addVacationCommandYearBeforeJoiningException {
     private int id;
     private String employee_name;
     private Integer year;
-    private Optional<Employee> employee;
+    private Employee employee;
 
 
-    public addVacationCommandYearBeforeJoiningException(int id, String employee_name, Integer year, Optional<Employee> employee) {
+    public addVacationCommandYearBeforeJoiningException(int id, String employee_name, Integer year, Employee employee) {
         this.id = id;
         this.employee_name = employee_name;
         this.year = year;
