@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/salaryController/addSalaryDetails").hasRole("HR")
                 .antMatchers("/HumanResources/notForHR/**").hasRole("USER")
                 .antMatchers("/HumanResources/Earning/get/**").hasAnyRole("HR","MANAGER")
-             //   .antMatchers("/HumanResources/Earning/add/**").hasRole("HR")
+                .antMatchers("/HumanResources/Earning/add/**").hasRole("HR")
                 .and()
                 .httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

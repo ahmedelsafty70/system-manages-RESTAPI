@@ -1,6 +1,7 @@
 package com.example.Phase12.commands.vacation;
 
 import com.example.Phase12.sections.Employee;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class addVacationCommandYearBeforeJoiningException {
     private int id;
     private String employee_name;
     private Integer year;
+    @JsonBackReference
     private Employee employee;
 
 

@@ -44,10 +44,6 @@ public class TeamController {
     @GetMapping(value = "gettingEmployeesUnderTeam/{id}")
     public List<Employee> getEmployeesInTeam(@PathVariable int id) throws NotFoundException{
 
-
-
         return teamService.EmployeesUnderTeam(id);
     }
-
-
 }

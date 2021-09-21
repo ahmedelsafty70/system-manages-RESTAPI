@@ -90,10 +90,7 @@ public class salaryDetails {
     public void getSalaryDetailsForbiddenException() throws Exception {
 
         int employeeId =1;
-        List<SalaryDetails> salaryDetails = salaryDetailsRepository.salaryOfSpecificEmployee(employeeId);
 
-
-        String JSONSalaryDetails = objectMapper.writeValueAsString(salaryDetails);
         mockMvc.perform(MockMvcRequestBuilders.get("/salaryController/getSalaryDetails/" + employeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());

@@ -1,5 +1,6 @@
 package com.example.Phase12.sections;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class SalaryDetails {
 
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="employee_id")
     private Employee employee;
 

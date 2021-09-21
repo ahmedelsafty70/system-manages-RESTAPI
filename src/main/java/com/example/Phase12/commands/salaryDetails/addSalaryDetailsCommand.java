@@ -1,6 +1,7 @@
 package com.example.Phase12.commands.salaryDetails;
 
 import com.example.Phase12.sections.Employee;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class addSalaryDetailsCommand {
     private int id;
     private Float actualSalary;
     private Date date;
+    @JsonBackReference
     private Employee employee;
 
 

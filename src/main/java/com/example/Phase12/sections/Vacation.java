@@ -1,5 +1,6 @@
 package com.example.Phase12.sections;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Vacation { // TO CALCULATE HOW MANY DAYS EXCEEDED TO CALCULATE SALA
     @Column(name = "exceeded_day")
     private int exceeded_day;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="employee_id")
     private Employee employee;
 
