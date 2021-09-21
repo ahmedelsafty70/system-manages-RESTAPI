@@ -273,14 +273,14 @@ public class Employee {
     @Test
     public void GettingEmployeeInfoForHRUsing() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
     }
     @Test
     public void GettingEmployeeInfoForHRandManagerUsing() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123")))
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
@@ -290,7 +290,7 @@ public class Employee {
     @Test
     public void GettingEmployeeInfoForHRUsingForbiddenException() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
     }
@@ -324,7 +324,7 @@ public class Employee {
     public void GettingEmployeeInfoEmployeeNotFoundExceptionTesting() throws Exception {
 
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/6")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/6")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
@@ -335,7 +335,7 @@ public class Employee {
     @Test
     public void GettingEmployeeInfoUnauthenticatedExceptionForHRTesting() throws Exception{
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("sasa", "hr123")));
     }
 
@@ -436,7 +436,7 @@ public class Employee {
 
         int EmployeeId = 1;
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingSalary/" + EmployeeId)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingSalary/" + EmployeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
@@ -457,7 +457,7 @@ public class Employee {
     public void GettingSalaryInfoHRUsingNotFoundException() throws Exception{
         int EmployeeId = 7;
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingSalary/" + EmployeeId)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingSalary/" + EmployeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isNotFound())
@@ -486,7 +486,7 @@ public class Employee {
     public void GettingEmployeesOfManager() throws Exception {
 
         Optional<com.example.Phase12.sections.Employee> manager = employeeRepository.findById(1);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingUnderEmployees/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingUnderEmployees/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
 
@@ -509,7 +509,7 @@ public class Employee {
     @Test
     public void GettingEmployeesOfManagerTesting() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingUnderEmployees/4")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingUnderEmployees/4")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
@@ -521,7 +521,7 @@ public class Employee {
     @Test
     public void GettingEmployeesRecursively() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployeesRecursively/2")
+        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployeesRecursively/2")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
 
@@ -540,7 +540,7 @@ public class Employee {
     @Test
     public void GettingEmployeesRecursivelyIdNotFound() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployeesRecursively/8")
+        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployeesRecursively/8")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))

@@ -51,14 +51,14 @@ public class EmployeeController extends BaseController {
 
     }
 
-    @RequestMapping(value = "gettingEmployeesRecursively/{id}")
+    @RequestMapping(value = "get/gettingEmployeesRecursively/{id}")
     public List<Employee> getEmployeesUnderManagerRecursively(@PathVariable int id){
 
         return employeeService.getEmployeesUnderManagerRecursively(id);
     }
 
 
-    @GetMapping(value = "gettingSalary/{idOfEmployee}")
+    @GetMapping(value = "get/gettingSalary/{idOfEmployee}")
     public EmployeeDTO SalaryInfoHRUser(@PathVariable int idOfEmployee) throws NotFoundException {
 
         if(employeeRepository.findById(idOfEmployee).orElse(null) == null)
@@ -73,7 +73,7 @@ public class EmployeeController extends BaseController {
         return this.employeeRepository.findAll();
     }
 
-    @GetMapping(value = "gettingEmployee/{id}")
+    @GetMapping(value = "get/gettingEmployee/{id}")
     public addEmployeeDto GettingInfoOfEmployee(@PathVariable int id) throws Exception {
 
         if(!employeeRepository.existsById(id))
@@ -94,7 +94,7 @@ public class EmployeeController extends BaseController {
          }
     }
 
-    @GetMapping(value = "gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas
+    @GetMapping(value = "get/gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas
         public List<Employee> EmployeesManager(@PathVariable int id){
 
 

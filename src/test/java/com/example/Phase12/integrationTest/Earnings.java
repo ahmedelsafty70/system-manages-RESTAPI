@@ -89,8 +89,6 @@ public class Earnings extends BaseController {
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
                 .andExpect(result -> Assertions.assertEquals("You did not request any changes", result.getResolvedException().getMessage()));
-
-
     }
 
     @Test

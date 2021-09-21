@@ -2,12 +2,14 @@ package com.example.Phase12.service;
 
 import com.example.Phase12.commands.earning.addEarningCommand;
 import com.example.Phase12.dto.addEarningDto;
+import com.example.Phase12.dto.addEmployeeDto;
 import com.example.Phase12.exceptions.BadArgumentsException;
 import com.example.Phase12.repository.EarningRepository;
 import com.example.Phase12.repository.EmployeeRepository;
 import com.example.Phase12.repository.VacationRepository;
 import com.example.Phase12.sections.Earnings;
 import com.example.Phase12.sections.Employee;
+import com.example.Phase12.security.BaseController;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class EarningService {
+public class EarningService extends BaseController {
 
     private EmployeeRepository employeeRepository;
     private EarningRepository earningRepository;

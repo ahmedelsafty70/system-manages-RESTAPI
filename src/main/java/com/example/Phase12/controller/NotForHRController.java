@@ -35,10 +35,7 @@ public class NotForHRController extends BaseController {
 
     @GetMapping(value = "gettingSalary")
     public EmployeeDTO SalaryInfo() throws NotFoundException {
-
-        if(employeeRepository.findByUsername(getCurrentUser().getUsername()) == null)
-            throw new ResourceNotFoundException("salary with this username is not found!");
-
+        
         Employee employee = employeeService.findByUser(getCurrentUser().getUsername());
         return employeeService.gettingSalaries(employee);
     }
@@ -46,14 +43,7 @@ public class NotForHRController extends BaseController {
     @GetMapping(value = "gettingEmployee")
     public addEmployeeDto GettingInfoOfEmployee() throws Exception {
 
-        if(employeeRepository.findByUsername(getCurrentUser().getUsername()) == null)
-            throw new ResourceNotFoundException("employee with this username is not found!");
-
         Employee employee = employeeService.findByUser(getCurrentUser().getUsername());
         return employeeService.GettingInfo(employee);
     }
-
-
-
-
 }
