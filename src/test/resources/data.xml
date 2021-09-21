@@ -4,13 +4,13 @@
     <department id="1" department_name="abc"/>
 
 
-    <employee id_employee='1' joined_year="2020" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" second_name="lil" gender='Male' net_salary="800.6"
+    <employee id_employee='1' first_name="ahmed" joined_year="2020" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" second_name="lil" gender='Male' net_salary="800.6"
               gross_salary="67.7" department_id='1' team_id='1' active="1" bonus="466" raises="453" years_of_experience="100"
               permissions="gettingEmployees" password="$2a$10$v21ma/0iW089WQb17kg55.22L42JcQ94VIP0xkr38uBrXmhrDontC" username="safty" roles="USER" national_id="234" degree_enum='Fresh'/>
-    <employee id_employee='2' joined_year="2020" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" second_name="lil" gender='Male' net_salary='454' degree_enum='Fresh'
+    <employee id_employee='2' first_name="ahmed" joined_year="2020" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" second_name="lil" gender='Male' net_salary='454' degree_enum='Fresh'
               gross_salary='67.7' department_id='1' team_id='1' manager_id = '1' active="1" bonus="466" raises="453" years_of_experience="122"
               permissions="gettingEmployees" password="$2a$10$B3bCtAfwBA31XB9QK8ggHuHn9cFP0nztI6Gma/Zuv1EHEbYy3FQoe" username="joo" roles="MANAGER" national_id="678"/>
-    <employee id_employee='3' joined_year="2020" second_name="lil" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" gender='Male' net_salary='454' degree_enum='Fresh'
+    <employee id_employee='3' first_name="ahmed" joined_year="2020" second_name="lil" date_of_birth="2020-3-12 12:00:00" graduation_date="2020-3-24 12:00:00" gender='Male' net_salary='454' degree_enum='Fresh'
               gross_salary='67.7' department_id='1' team_id='1' manager_id = '2' active="1" bonus="466" raises="453" years_of_experience="455"
               permissions="gettingEmployees" password="$2a$12$wK1DatLPfrOpyuJp5g4VN.DFcIKvqMF8.zZ1vn3MKY01ATIYS1FEy" username="spongBob" roles="HR" national_id="741"/>
 

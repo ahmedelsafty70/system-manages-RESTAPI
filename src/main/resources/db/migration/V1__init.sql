@@ -20,7 +20,7 @@ create table employee
     gender          varchar(255) not null,
     graduation_date datetime null,
     gross_salary    float not null,
---     first_name      varchar(255) null,
+    first_name      varchar(255) null,
     second_name     varchar(255) not null,
     net_salary      float null,
     department_id   integer null,

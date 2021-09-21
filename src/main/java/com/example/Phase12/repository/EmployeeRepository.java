@@ -14,13 +14,13 @@ import java.util.stream.Stream;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Transactional
-   @Query(value = "with recursive cte(id_employee, date_of_birth, gender, graduation_date, gross_salary, net_salary, department_id, manager_id, team_id, roles, username, password , active ,permissions ,second_name ,national_id ,joined_year ,degree_enum ,bonus ,raises ,years_of_experience) as (\n" +
-           "  select     id_employee, date_of_birth, gender, graduation_date, gross_salary, net_salary, department_id, manager_id, team_id, roles, username, password , active ,permissions ,second_name ,national_id ,joined_year ,degree_enum ,bonus ,raises ,years_of_experience\n" +
+   @Query(value = "with recursive cte(id_employee,first_name, date_of_birth, gender, graduation_date, gross_salary, net_salary, department_id, manager_id, team_id, roles, username, password , active ,permissions ,second_name ,national_id ,joined_year ,degree_enum ,bonus ,raises ,years_of_experience) as (\n" +
+           "  select     id_employee,first_name, date_of_birth, gender, graduation_date, gross_salary, net_salary, department_id, manager_id, team_id, roles, username, password , active ,permissions ,second_name ,national_id ,joined_year ,degree_enum ,bonus ,raises ,years_of_experience\n" +
            "\n" +
            "  from       employee\n" +
            "  where      manager_id =:id\n" +
            "  union all\n" +
-           "  select     p.id_employee, p.date_of_birth, p.gender, p.graduation_date, p.gross_salary, p.net_salary, p.department_id, p.manager_id, p.team_id ,\n" +
+           "  select     p.id_employee,p.first_name, p.date_of_birth, p.gender, p.graduation_date, p.gross_salary, p.net_salary, p.department_id, p.manager_id, p.team_id ,\n" +
            "           p.roles, p.username, p.password , p.active ,p.permissions ,p.second_name ,p.national_id ,p.joined_year ,p.degree_enum ,p.bonus ,p.raises ,p.years_of_experience\n" +
            "  from       employee p\n" +
            "  inner join cte \n" +

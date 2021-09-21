@@ -50,6 +50,10 @@ import java.util.*;
     @Column(name = "grossSalary")
     private Float grossSalary;
 
+
+    @Column(name = "first_name")
+    private String first_name;
+
     @JsonIgnore
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Employee> listOfEmployees;
@@ -161,6 +165,14 @@ import java.util.*;
 
     public List<Earnings> getListOfEarnings() {
         return ListOfEarnings;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     public String getNational_id() {
