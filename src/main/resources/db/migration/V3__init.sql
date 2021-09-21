@@ -20,5 +20,11 @@ VALUES(3,'2020','2020-3-12 12:00:00','2020-3-12 12:00:00','mona','Female','800.6
 INSERT INTO vacation(id,employee_name,current_year,exceeded_day,employee_id)
 VALUES(1,'lil','2021',0,1);
 
+INSERT INTO earnings(id,raises,bonus,date,employee_id)
+VALUES(1,'5','500','2020-03-1',1);
+
+INSERT INTO earnings(id,raises,bonus,date,employee_id)
+VALUES(2,'2','300','2020-04-1',1);
+
 INSERT INTO salary_details(id,actual_salary,date,employee_id)
 VALUES(1,'24','2020-03-12',1)

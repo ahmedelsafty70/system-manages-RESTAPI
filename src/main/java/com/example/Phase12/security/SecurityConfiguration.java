@@ -45,7 +45,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/HumanResources/employees/**").hasRole("HR")
+
+//                .antMatchers("HumanResources/employees/gettingEmployee/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/HumanResources/employees/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/departmentController/**").hasRole("HR")
                 .antMatchers("/departmentController/GetDep/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/teamController/adding").hasRole("HR")
@@ -58,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/salaryController/addSalaryDetails").hasRole("HR")
                 .antMatchers("/HumanResources/notForHR/**").hasRole("USER")
                 .antMatchers("/HumanResources/Earning/get/**").hasAnyRole("HR","MANAGER")
-                .antMatchers("/HumanResources/Earning/add/**").hasRole("HR")
+             //   .antMatchers("/HumanResources/Earning/add/**").hasRole("HR")
                 .and()
                 .httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

@@ -98,18 +98,16 @@ public class Earnings extends BaseController {
 
         int employeeId = 1;
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/Earning/get/" + employeeId)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/Earning/get/" + employeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
-
-
     }
     @Test
     public void getListOfEarningOfAnEmployeeSinceHeJoinedForbiddenException() throws Exception{
 
         int employeeId = 1;
 
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/HumanResources/Earning/get/" + employeeId)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/Earning/get/" + employeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
 

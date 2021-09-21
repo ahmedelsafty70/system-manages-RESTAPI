@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class EarningService {
@@ -48,7 +49,7 @@ public class EarningService {
         if(earningCommand.getBonus() == 0 && earningCommand.getRaises() == 0)  //Bad Request
             throw new BadArgumentsException("You did not request any changes");
 
-            Earnings earnings = mapTOEarning(earningCommand); //From command->Earning To object->Earning
+        Earnings earnings = mapTOEarning(earningCommand); //From command->Earning To object->Earning
 
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -72,10 +73,9 @@ public class EarningService {
         return mapToEarningDto(earningsToBeChanged);
     }
 
-//    public List<Earnings> getEarning(int employeeId){
-//        Employee employee = employeeRepository.findById(employeeId).orElse(null);
-//        return employee.getListOfEarnings();
-//
-//    }
+    public List<Earnings> getEarning(int employeeId){
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        return employee.getListOfEarnings();
+    }
 
 }

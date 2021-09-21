@@ -1,7 +1,6 @@
 package com.example.Phase12.sections;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -15,8 +14,6 @@ import java.util.*;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmployee")
     private int idEmployee;
-//    @Column(name = "name")
-//    private String name;
 
     @Column(name = "second_name")
     private String second_name;
@@ -42,9 +39,8 @@ import java.util.*;
     @Column(name = "graduationDate")
     private Date graduationDate;
 
-
-
     @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy="employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Earnings> ListOfEarnings ;
 
@@ -75,7 +71,7 @@ import java.util.*;
 
 
     @JsonIgnore
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "teamId")
     private Team team;
 
@@ -96,52 +92,27 @@ import java.util.*;
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<SalaryDetails> listOfSalaryHistories;
 
+
+
     @Enumerated(EnumType.STRING)
-    private DegreeEnum degree_enum;
+    private DegreeEnum degreeEnum;
 
     @Column(name = "years_of_experience")
     private int yearsOfExperience;
-
-
-
-//    public Employee(addEmployeeCommand source, Optional<Employee> destination){
-////        if(source.first_name != null)
-////            destination.get().setFirst_name(source.getFirst_name());
-//        if(source.getSecond_name() != null)
-//            destination.get().setSecond_name(source.getSecond_name());
-//        if(source.getRoles() != null)
-//            destination.get().setRoles(source.getRoles());
-//        if (source.getNational_id() != null)
-//            destination.get().setNational_id(source.getNational_id());
-//        if(source.getActive() != 0)
-//            destination.get().setActive(source.getActive());
-//        if(source.getPassword() != null)
-//            destination.get().setPassword(source.getPassword());
-//        if(source.getUsername() != null)
-//            destination.get().setUsername(source.getUsername());
-////        if(source.getYearsOfExperience() !=0)
-////            destination.get().setYearsOfExperience(source.getYearsOfExperience());
-//        if(source.getGrossSalary() != null)
-//            destination.get().setGrossSalary(source.getGrossSalary());
-//    }
-
 
     public Employee() {
 
     }
 
-    public Employee(String name, Gender gender) {
-//        this.name = name;
-
+    public Employee(Gender gender) {
         this.gender = gender;
     }
 
-    public Employee(String username, String password, String roles, String permissions,String first_name){
+    public Employee(String username, String password, String roles, String permissions){
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.permissions = permissions;
-//        this.first_name=first_name;
         this.active = 1;
     }
 
@@ -157,9 +128,6 @@ import java.util.*;
         this.yearsOfExperience = yearsOfExperience;
         this.grossSalary = grossSalary;
     }
-
-
-
     public int getIdEmployee() {
         return idEmployee;
     }
@@ -167,23 +135,6 @@ import java.util.*;
     public void setIdEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
-
-//    public List<Earnings> getListOfEarnings() {
-//        return ListOfEarnings;
-//    }
-//
-//    public void setListOfEarnings(List<Earnings> listOfEarnings) {
-//        ListOfEarnings = listOfEarnings;
-//    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -208,12 +159,8 @@ import java.util.*;
         this.raises = raises;
     }
 
-    public DegreeEnum getDegreeEnum() {
-        return degree_enum;
-    }
-
-    public void setDegreeEnum(DegreeEnum degreeEnum) {
-        this.degree_enum = degreeEnum;
+    public List<Earnings> getListOfEarnings() {
+        return ListOfEarnings;
     }
 
     public String getNational_id() {
@@ -224,36 +171,9 @@ import java.util.*;
         this.national_id = national_id;
     }
 
-    public Double getBonus() {
-        return bonus;
-    }
 
-    public void setBonus(Double bonus) {
-        this.bonus = bonus;
-    }
-
-    public DegreeEnum getDegree_enum() {
-        return degree_enum;
-    }
-
-    public void setDegree_enum(DegreeEnum degree_enum) {
-        this.degree_enum = degree_enum;
-    }
-
-    public int getYearsOfExperience() {
-        return yearsOfExperience;
-    }
-
-    public void setYearsOfExperience(int yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
-    }
-
-    public Gender getGender() {
-        return this.gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setJoined_year(Integer joined_year) {
+        this.joined_year = joined_year;
     }
 
     public Date getGraduationDate() {
@@ -264,16 +184,13 @@ import java.util.*;
         this.graduationDate = graduationDate;
     }
 
-    public Integer getJoined_year() {
-        return joined_year;
+
+    public void setListOfEarnings(List<Earnings> listOfEarnings) {
+        ListOfEarnings = listOfEarnings;
     }
 
-    public void setJoined_year(Integer joined_year) {
-        this.joined_year = joined_year;
-    }
-
-    public Department getDepartment() {
-        return department;
+    public void setListOfEmployees(List<Employee> listOfEmployees) {
+        this.listOfEmployees = listOfEmployees;
     }
 
     public List<Vacation> getVacationList() {
@@ -284,14 +201,6 @@ import java.util.*;
         this.vacationList = vacationList;
     }
 
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
-    }
-
     public String getPermissions() {
         return permissions;
     }
@@ -300,6 +209,40 @@ import java.util.*;
         this.permissions = permissions;
     }
 
+    public Double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Double bonus) {
+        this.bonus = bonus;
+    }
+    public DegreeEnum getDegreeEnum() {
+        return degreeEnum;
+    }
+
+    public void setDegreeEnum(DegreeEnum degreeEnum) {
+        this.degreeEnum = degreeEnum;
+    }
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+    public Integer getJoined_year() {
+        return joined_year;
+    }
+    public Department getDepartment() {
+        return department;
+    }
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
     public String getRoles() {
         return roles;
     }
@@ -331,11 +274,6 @@ import java.util.*;
     public List<Employee> getListOfEmployees() {
         return listOfEmployees;
     }
-
-    public void setListOfEmployees(List<Employee> listOfEmployees) {
-        this.listOfEmployees = listOfEmployees;
-    }
-
     public Float getNetSalary() {
         return netSalary;
     }
@@ -343,15 +281,6 @@ import java.util.*;
     public void setNetSalary(Float netSalary) {
         this.netSalary = netSalary;
     }
-
-    public List<SalaryDetails> getListOfSalaryHistories() {
-        return listOfSalaryHistories;
-    }
-
-    public void setListOfSalaryHistories(List<SalaryDetails> listOfSalaryHistories) {
-            listOfSalaryHistories = listOfSalaryHistories;
-    }
-
     public String getSecond_name() {
         return second_name;
     }

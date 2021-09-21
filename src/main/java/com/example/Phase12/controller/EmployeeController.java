@@ -78,8 +78,20 @@ public class EmployeeController extends BaseController {
 
         if(!employeeRepository.existsById(id))
             throw new ResourceNotFoundException("employee with this id is not found!");
+
         Employee employee = employeeRepository.findById(id).orElse(null);
-        return employeeService.GettingInfo(employee);
+
+//        if(employeeRepository.findByUsername(getCurrentUser().getUsername()) == null)
+//            throw new ResourceNotFoundException("employee with this username is not found!");
+
+        Employee managerOrHR = employeeService.findByUser(getCurrentUser().getUsername());
+
+         if(managerOrHR.getRoles().equals("HR")){
+             return employeeService.GettingInfo(employee);
+         }
+         else{
+             return employeeService.GettingInfoForManager(managerOrHR,employee);
+         }
     }
 
     @GetMapping(value = "gettingUnderEmployees/{id}") //batgeeb el ta7teeh bas

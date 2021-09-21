@@ -64,7 +64,6 @@ public class EmployeeService extends BaseController {
             throw new ResourceNotFoundException("Employee.years_of_experience is null");
         if(addEmployeeCommand.getRoles() == null)
             throw new ResourceNotFoundException("Employee.roles is null");
-
         if(parseInt(addEmployeeCommand.getNational_id()) < 0)
             throw new BadArgumentsException("INVALID national-id");
 
@@ -180,13 +179,30 @@ public class EmployeeService extends BaseController {
     }
 
 
-    public addEmployeeDto GettingInfo(Employee employee) throws Exception {
 
+
+    public addEmployeeDto GettingInfo(Employee employee) throws Exception {
 
         addEmployeeDto employeeDto = mapToEmployeeDto(employee);
 
         return employeeDto;
     }
+
+
+
+    public addEmployeeDto GettingInfoForManager(Employee manager,Employee employeeToBeFound){
+
+            for(Employee x : manager.getListOfEmployees()){
+                if (x.getIdEmployee() == employeeToBeFound.getIdEmployee()){
+                    addEmployeeDto employeeDto = mapToEmployeeDto(employeeToBeFound);
+                    return employeeDto;
+                }
+            }
+        throw new BadArgumentsException("The manager is not allowed to see this info!");
+
+    }
+
+
 
     public void ReplacingEmployeesToAnotherManager(Optional<Employee> employee) {
         for (int i = 0; i < employee.get().getListOfEmployees().size(); i++) {
@@ -213,7 +229,5 @@ public class EmployeeService extends BaseController {
 //        return ret;
         return employeeRepository.getEmployeesUnderManagerRecursively(id);
     }
-
-
 }
 

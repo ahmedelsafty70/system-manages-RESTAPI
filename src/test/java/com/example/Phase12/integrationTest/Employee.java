@@ -6,7 +6,8 @@ import com.example.Phase12.commands.employee.*;
 import com.example.Phase12.exceptions.BadArgumentsException;
 import com.example.Phase12.exceptions.ResourceNotFoundException;
 import com.example.Phase12.repository.*;
-import com.example.Phase12.sections.Earnings;
+import com.example.Phase12.sections.DegreeEnum;
+import com.example.Phase12.sections.Gender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -27,8 +28,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-
-import java.util.Date;
 
 import java.util.Optional;
 
@@ -63,7 +62,7 @@ public class Employee {
     public void addEmployee() throws Exception {
 
         addEmployeeCommand employeeCommand = new addEmployeeCommand(10, "mohamed", "HR", "18105254", "ay7aga"
-                , passwordEncoder.encode("hr123"), 1, 12, 15f,Male,Senior);
+                , passwordEncoder.encode("hr123"), 1, 12, 15f, Gender.Male, DegreeEnum.Senior);
 
         String employee = objectMapper.writeValueAsString(employeeCommand);
 
@@ -279,6 +278,16 @@ public class Employee {
                 .andExpect(status().isOk());
     }
     @Test
+    public void GettingEmployeeInfoForHRandManagerUsing() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123")))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
+                .andExpect(result -> Assertions.assertEquals("The manager is not allowed to see this info!", result.getResolvedException().getMessage()));
+    }
+
+    @Test
     public void GettingEmployeeInfoForHRUsingForbiddenException() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployee/1")
@@ -293,6 +302,16 @@ public class Employee {
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isOk());
     }
+//    @Test
+//    public void GettingEmployeeInfoForUSERUsing2() throws Exception {
+//
+//        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/notForHR/gettingEmployee")
+//                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
+//                .andExpect(status().isBadRequest())
+//                .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
+//                .andExpect(result -> Assertions.assertEquals("The manager is not allowed to see this info!", result.getResolvedException().getMessage()));
+//
+//    }
     @Test
     public void GettingEmployeeInfoForUSERUsingForbiddenException() throws Exception {
 
