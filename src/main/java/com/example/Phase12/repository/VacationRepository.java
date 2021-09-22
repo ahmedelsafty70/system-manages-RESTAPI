@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface VacationRepository extends CrudRepository<Vacation, Integer> {
 
 
-
     @Transactional
     @Query(value = "SELECT COUNT(*) FROM vacation WHERE employee_id = :id AND current_year = :year", nativeQuery = true)
     int numberOfVacationDays(int id, int year);

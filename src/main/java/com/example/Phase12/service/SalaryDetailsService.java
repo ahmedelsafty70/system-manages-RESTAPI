@@ -99,15 +99,6 @@ public class SalaryDetailsService {
            Date date = Date.valueOf(LocalDate.now());
            int year = date.getYear()+1900;
 
-//           salaryDetails.setDate(date);
-//
-//           String formattedDate = String.format("yyyy/MM", date);
-//
-//           String[] arrayOfYearsAndMonths = formattedDate.split("/");
-
-
-          // int yearInInteger = Integer.parseInt(arrayOfYearsAndMonths[0]);
-
            int noOfDaysExceeded = vacationRepository.counterForTheExceededDays(employee.getIdEmployee(),year);
 
            double calculatingNetSalary = employee.getGrossSalary() + employee.getBonus() + employee.getRaises()

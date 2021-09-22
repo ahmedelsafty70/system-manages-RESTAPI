@@ -12,7 +12,6 @@ import java.io.IOException;
 @Component
 public class Http401AuthenticationEntryPoint implements AuthenticationEntryPoint
 {
-
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.sendError(401,"Unauthorized");

@@ -15,7 +15,6 @@ import java.util.Optional;
 public class Vacation { // TO CALCULATE HOW MANY DAYS EXCEEDED TO CALCULATE SALARY
 
     @Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "employee_name")

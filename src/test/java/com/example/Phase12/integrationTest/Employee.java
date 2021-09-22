@@ -270,7 +270,7 @@ public class Employee {
 
     }
 
-    @Test//////////////////
+    @Test
     public void GettingEmployeeInfoForHRandManagerUsing() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
@@ -302,16 +302,6 @@ public class Employee {
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isOk());
     }
-//    @Test
-//    public void GettingEmployeeInfoForUSERUsing2() throws Exception {
-//
-//        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/notForHR/gettingEmployee")
-//                .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
-//                .andExpect(status().isBadRequest())
-//                .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
-//                .andExpect(result -> Assertions.assertEquals("The manager is not allowed to see this info!", result.getResolvedException().getMessage()));
-//
-//    }
     @Test
     public void GettingEmployeeInfoForUSERUsingForbiddenException() throws Exception {
 
@@ -363,7 +353,6 @@ public class Employee {
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
                 .andExpect(status().isOk());
-
     }
     @Test
     public void modifyForbiddenException() throws Exception {
@@ -381,7 +370,6 @@ public class Employee {
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
                 .andExpect(status().isForbidden());
-
     }
 
     @Test
@@ -410,7 +398,6 @@ public class Employee {
     @Test
     public void GettingSalaryInfoOfMine() throws Exception {
 
-
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/notForHR/gettingSalary")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andDo(MockMvcResultHandlers.print())
@@ -428,8 +415,6 @@ public class Employee {
                 .andExpect(status().isForbidden());
 
     }
-
-
 
     @Test
     public void GettingSalaryInfoHR() throws Exception {
@@ -470,16 +455,14 @@ public class Employee {
     public void GettingSalaryInfoUnauthenticatedExceptionForHRTesting() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingSalary")
-                .with(SecurityMockMvcRequestPostProcessors.httpBasic("dada", "hr123")));
-
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("dada", "hr123"))); //Will write authentication request in the console
     }
 
     @Test
     public void GettingSalaryInfoUnauthenticatedExceptionForUserTesting() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/notForHR/gettingSalary")
-                .with(SecurityMockMvcRequestPostProcessors.httpBasic("baba", "hr123")));
-
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("baba", "hr123")));//Will write authentication request in the console
     }
 
     @Test
@@ -491,7 +474,6 @@ public class Employee {
                 .andExpect(status().isOk());
 
         com.example.Phase12.sections.Employee managerForChecking = employeeRepository.getById(1);
-
         Assertions.assertEquals(manager.get().getIdEmployee(), managerForChecking.getIdEmployee());
     }
 
@@ -502,8 +484,6 @@ public class Employee {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingUnderEmployees/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
-
-
     }
 
     @Test
@@ -514,8 +494,6 @@ public class Employee {
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> Assertions.assertEquals("manager with this id is not found!", result.getResolvedException().getMessage()));
-
-
     }
 
     @Test
@@ -524,8 +502,6 @@ public class Employee {
         mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployeesRecursively/2")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
-
-
     }
 
     @Test
@@ -546,11 +522,5 @@ public class Employee {
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> Assertions.assertEquals("The manager with this id not found!", result.getResolvedException().getMessage()));
 
-
-
     }
-
-
-
-
 }

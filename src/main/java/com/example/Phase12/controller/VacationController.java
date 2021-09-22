@@ -19,23 +19,18 @@ import java.util.Optional;
 public class VacationController {
 
     private VacationService vacationService;
-    private VacationRepository vacationRepository;
 
-    public VacationController(VacationService vacationService, VacationRepository vacationRepository) {
+    public VacationController(VacationService vacationService) {
         this.vacationService = vacationService;
-        this.vacationRepository = vacationRepository;
     }
 
     @PostMapping(value = "addVacation",produces= MediaType.APPLICATION_JSON_VALUE)
     public addVacationDto addVacation(@RequestBody addVacationCommand vacationCommand)throws Exception{
-
         return vacationService.savingVacation(vacationCommand);
     }
 
     @GetMapping(value = "get/{id}")
     public addVacationDto getVacation(@PathVariable int id){
-
-
         return vacationService.gettingVacation(id);
     }
 }

@@ -58,7 +58,6 @@ public class Department {
 
 
 
-
     @Test
     public void addDepartment() throws Exception {
 
@@ -103,7 +102,6 @@ public class Department {
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof BadArgumentsException))
                 .andExpect(result -> Assertions.assertEquals("department with this id is added before!", result.getResolvedException().getMessage()));
-
     }
 
     @Test
@@ -120,7 +118,6 @@ public class Department {
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> Assertions.assertEquals("The name is null!", result.getResolvedException().getMessage()));
-
     }
 
     @Test
@@ -140,13 +137,9 @@ public class Department {
     @Test
     public void getDepartmentForbiddenException() throws Exception{
 
-        Optional<Team> team = teamRepository.findById(1);
-
         this.mockMvc.perform(MockMvcRequestBuilders.get("/departmentController/GetDep/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
-
-
     }
 
 

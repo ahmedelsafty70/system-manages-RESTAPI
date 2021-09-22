@@ -29,7 +29,4 @@ public class SalaryDetails {
     @JsonBackReference
     @JoinColumn(name="employee_id")
     private Employee employee;
-
-
-
 }

@@ -24,8 +24,6 @@ import java.io.IOException;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
-
     private UserPrincipalDetailsService userPrincipalDetailsService;
     private Http401AuthenticationEntryPoint entryPoint;
 
@@ -46,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 
-//                .antMatchers("HumanResources/employees/gettingEmployee/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/HumanResources/employees/get/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/HumanResources/employees/add").hasRole("HR")
                 .antMatchers("/departmentController/**").hasRole("HR")
@@ -81,7 +78,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-
 
 }

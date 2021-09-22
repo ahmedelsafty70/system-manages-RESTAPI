@@ -29,16 +29,11 @@ public class TeamController {
 
     @RequestMapping(value = "adding")
     public addTeamDto savingTeam(@RequestBody addTeamCommand teamCommand){
-
-
-
         return teamService.savingTeam(teamCommand);
     }
 
     @GetMapping(value = "getTeam/{id}")
     public addTeamDto getTeam(@PathVariable int id){
-
-
         return teamService.getTeam(id);
     }
     @GetMapping(value = "gettingEmployeesUnderTeam/{id}")

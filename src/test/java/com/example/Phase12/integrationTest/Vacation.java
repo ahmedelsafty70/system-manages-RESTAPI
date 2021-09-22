@@ -48,12 +48,8 @@ public class Vacation {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private VacationRepository vacationRepository;
 
@@ -75,8 +71,6 @@ public class Vacation {
     @Test
     public void addingVacationForbiddenException() throws Exception {
 
-       // com.example.Phase12.sections.Employee employee = employeeRepository.findById(1).orElse(null);
-
         addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, '1'); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommand);
@@ -92,7 +86,6 @@ public class Vacation {
 
     @Test
     public void addingVacationVacationAlreadyExistTesting() throws Exception {
-
 
         addVacationCommandVacationIdException vacationCommandVacationIdException = new addVacationCommandVacationIdException(1); //##ASK AMIN for the employee
 
@@ -142,8 +135,6 @@ public class Vacation {
     @Test
     public void addingVacationYearBeforeJoiningInvalidTesting() throws Exception {
 
-
-        //Employee employee = employeeRepository.findById(1).orElse(null);
         addVacationCommandYearBeforeJoiningException vacationCommandYearException = new addVacationCommandYearBeforeJoiningException(5, "sasa", 199, 1); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommandYearException);
@@ -161,9 +152,7 @@ public class Vacation {
     public void gettingVacation() throws Exception {
         Optional<com.example.Phase12.sections.Vacation> vacation = vacationRepository.findById(1);
 
-        String JSONVacation = objectMapper.writeValueAsString(vacation.get());
         mockMvc.perform(MockMvcRequestBuilders.get("/VacationController/get/1")
-
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123")))
                 // .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .andExpect(status().isOk());
@@ -171,21 +160,15 @@ public class Vacation {
         Optional<com.example.Phase12.sections.Vacation> vacationResult = vacationRepository.findById(1);
 
         Assertions.assertEquals(vacation.get().getId(), vacationResult.get().getId());
-
     }
 
     @Test
     public void gettingVacationForbiddenException() throws Exception {
-        Optional<com.example.Phase12.sections.Vacation> vacation = vacationRepository.findById(1);
 
-        String JSONVacation = objectMapper.writeValueAsString(vacation.get());
         mockMvc.perform(MockMvcRequestBuilders.get("/VacationController/get/1")
-
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
-
     }
-
 
 
     @Test
@@ -200,9 +183,6 @@ public class Vacation {
                 .andExpect(status().isNotFound())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResourceNotFoundException))
                 .andExpect(result -> Assertions.assertEquals("vacation with this id doesn't exist!", result.getResolvedException().getMessage()));
-
-
     }
-
 
 }

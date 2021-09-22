@@ -91,7 +91,6 @@ public class VacationService {
             throw new ResourceNotFoundException("vacation with this id doesn't exist!");
 
         Vacation vacation = vacationRepository.findById(id).orElse(null);
-        // addVacationDto vacationDto = new addVacationDto(vacation.get().getId(),vacation.get().getEmployee_name(),vacation.get().getCurrentYear(),);
         addVacationDto vacationDto = mapToVacationDto(vacation);
         return vacationDto;
     }

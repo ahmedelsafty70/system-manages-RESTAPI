@@ -46,11 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringJUnitConfig(ScheduledConfig.class)
 public class Team {
 
-
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private TeamService teamService;
 
     @Autowired
     private TeamRepository teamRepository;
@@ -59,11 +56,8 @@ public class Team {
     private ObjectMapper objectMapper;
 
 
-
-
     @Test
     public void AddTeam() throws Exception {
-
 
         addTeamCommand teamCommand = new addTeamCommand(2, "sa3ka");
 
@@ -84,7 +78,6 @@ public class Team {
 
     @Test
     public void AddTeamForbiddenException() throws Exception {
-
 
         addTeamCommand teamCommand = new addTeamCommand(2, "sa3ka");
 
@@ -162,7 +155,6 @@ public class Team {
 
         Optional<com.example.Phase12.sections.Team> team = teamRepository.findById(1);
 
-
         this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/gettingEmployeesUnderTeam/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123"))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -180,7 +172,6 @@ public class Team {
 
         Optional<com.example.Phase12.sections.Team> team = teamRepository.findById(1);
 
-
         this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/gettingEmployeesUnderTeam/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -194,10 +185,6 @@ public class Team {
 
         Optional<com.example.Phase12.sections.Team> team = teamRepository.findById(1);
 
-        List<Employee> employees = teamService.EmployeesUnderTeam(team.get().getIdTeam());
-
-
-      //     String jsonEmployees = objectMapper.writeValueAsString(employees);
         this.mockMvc.perform(MockMvcRequestBuilders.get("/teamController/gettingEmployeesUnderTeam/5")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123"))
                 .contentType(MediaType.APPLICATION_JSON)

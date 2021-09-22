@@ -108,8 +108,6 @@ public class Earnings extends BaseController {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/Earning/get/" + employeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
-
-
     }
 
 }

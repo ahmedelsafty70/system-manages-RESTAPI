@@ -80,16 +80,6 @@ public class EmployeeService extends BaseController {
         return employeeDto;
     }
 
-    public Employee calculateNetSalary(Employee employee) {
-
-
-        double net_salary = employee.getGrossSalary() - ConstantsDeduction.insurance;  // No Bonus And Raises In The First Time
-
-        employee.setNetSalary((float) (net_salary - (net_salary * ConstantsDeduction.taxes)));
-
-        return employee;
-    }
-
     public Optional<Employee> getUser(Integer id) throws NotFoundException {
         return employeeRepository.findById(id);
     }
@@ -144,22 +134,6 @@ public class EmployeeService extends BaseController {
         return employeeRepository.findByUsername(username);
     }
 
-    //    public double addBonusAndRaises(Employee employee){
-//        double grossSalary=0.0;
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-//        Date date = new Date();
-//
-//        String[] arrayForCurrentDate = formatter.format(date).split("/");
-//        String[] arrayForDateOfEmployee = employee.getListOfSalaryHistories().get(employee.getIdEmployee()).getDate().toString().split("/");
-//
-//
-//        if(arrayForDateOfEmployee[0].equals(arrayForCurrentDate[0]) && arrayForDateOfEmployee[1].equals(arrayForCurrentDate[1])) {
-//            grossSalary = grossSalary + employee.getListOfSalaryHistories().get(employee.getIdEmployee()).getBonus();
-//        }
-//
-//        return grossSalary;
-//    }
     public EmployeeDTO gettingSalaries(Employee employee) throws NotFoundException {
 
         double calculatingNetSalary = employee.getNetSalary();
@@ -178,17 +152,10 @@ public class EmployeeService extends BaseController {
         return employee.get().getListOfEmployees();
     }
 
-
-
-
-    public addEmployeeDto GettingInfo(Employee employee) throws Exception {
-
+    public addEmployeeDto GettingInfo(Employee employee){
         addEmployeeDto employeeDto = mapToEmployeeDto(employee);
-
         return employeeDto;
     }
-
-
 
     public addEmployeeDto GettingInfoForManager(Employee manager,Employee employeeToBeFound){
 
@@ -202,8 +169,6 @@ public class EmployeeService extends BaseController {
 
     }
 
-
-
     public void ReplacingEmployeesToAnotherManager(Optional<Employee> employee) {
         for (int i = 0; i < employee.get().getListOfEmployees().size(); i++) {
             employee.get().getListOfEmployees().get(i).setManager(employee.get().getManager());
@@ -215,18 +180,6 @@ public class EmployeeService extends BaseController {
         if(!employeeRepository.existsById(id))
             throw new ResourceNotFoundException("The manager with this id not found!");
 
-//        Employee employee = employeeRepository.findById(id).orElse(null);
-//        List<Employee> ret = new ArrayList<>();
-//        if(employee!=null){
-//            if(employee.getListOfEmployees()==null) return ret;
-//            for(var emp : employee.getListOfEmployees())
-//            {
-//                ret.add(emp);
-//                ret.addAll(getEmployeesUnderManagerRecursively(emp.getIdEmployee()));
-//            }
-//        }
-//
-//        return ret;
         return employeeRepository.getEmployeesUnderManagerRecursively(id);
     }
 }

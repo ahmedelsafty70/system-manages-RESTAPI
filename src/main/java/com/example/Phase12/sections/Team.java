@@ -24,6 +24,4 @@ public class Team {
     @JsonIgnore
     @OneToMany(mappedBy = "team",fetch = FetchType.EAGER)
     private List<Employee> employees;
-
-
 }
