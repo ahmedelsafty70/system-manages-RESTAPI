@@ -47,7 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
 //                .antMatchers("HumanResources/employees/gettingEmployee/**").hasAnyRole("HR","MANAGER")
-                .antMatchers("/HumanResources/employees/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/HumanResources/employees/get/**").hasAnyRole("HR","MANAGER")
+                .antMatchers("/HumanResources/employees/add").hasRole("HR")
                 .antMatchers("/departmentController/**").hasRole("HR")
                 .antMatchers("/departmentController/GetDep/**").hasAnyRole("HR","MANAGER")
                 .antMatchers("/teamController/adding").hasRole("HR")

@@ -38,13 +38,13 @@ public class EmployeeController extends BaseController {
 
     }
 
-    @PutMapping(value = {"updating/{id}"})
+    @PutMapping(value = {"get/updating/{id}"})
     public addEmployeeDto setEmployeeService(@RequestBody addEmployeeCommand employeeCommand, @PathVariable int id) throws Exception {
 
         return employeeService.modifyUser(employeeCommand,id);
     }
 
-    @DeleteMapping(value = "deleting/{id}")
+    @DeleteMapping(value = "get/deleting/{id}")
     public void deleteEmployee(@PathVariable int id) throws Exception {
 
         employeeService.deleteEmployee(id);

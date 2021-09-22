@@ -241,7 +241,7 @@ public class Employee {
     @Test
     public void DeletingEmployeeAndManagers() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/deleting/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/get/deleting/2")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
         Assertions.assertEquals(employeeRepository.existsById(2), false);
@@ -251,7 +251,7 @@ public class Employee {
     @Test
     public void DeletingEmployeeAndManagersForbiddenException() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/deleting/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/get/deleting/2")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
 
@@ -260,7 +260,7 @@ public class Employee {
     @Test
     public void DeletingEmployeeAndManagersNotFoundTesting() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/deleting/9")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/HumanResources/employees/get/deleting/9")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andDo(print())
                 .andExpect(status().isNotFound())
@@ -270,15 +270,15 @@ public class Employee {
 
     }
 
-    @Test
-    public void GettingEmployeeInfoForHRUsing() throws Exception {
+    @Test//////////////////
+    public void GettingEmployeeInfoForHRandManagerUsing() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123")))
                 .andExpect(status().isOk());
     }
     @Test
-    public void GettingEmployeeInfoForHRandManagerUsing() throws Exception {
+    public void GettingEmployeeInfoForHRandManagerUsingButManagerNotAllowedToSeeThatEmployee() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployee/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("joo", "manager123")))
@@ -359,7 +359,7 @@ public class Employee {
 
         String JSONEmployee = objectMapper.writeValueAsString(employeeCommand);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/updating/" + idOfThePersonToBeUpdated)
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/get/updating/" + idOfThePersonToBeUpdated)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
                 .andExpect(status().isOk());
@@ -377,7 +377,7 @@ public class Employee {
 
         String JSONEmployee = objectMapper.writeValueAsString(employeeCommand);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/updating/" + idOfThePersonToBeUpdated)
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/get/updating/" + idOfThePersonToBeUpdated)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
                 .andExpect(status().isForbidden());
@@ -396,7 +396,7 @@ public class Employee {
 
         String JSONEmployee = objectMapper.writeValueAsString(employeeCommand);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/updating/" + idOfThePersonToBeUpdated)
+        this.mockMvc.perform(MockMvcRequestBuilders.put("/HumanResources/employees/get/updating/" + idOfThePersonToBeUpdated)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("spongBob", "hr123"))
                 .contentType(MediaType.APPLICATION_JSON).content(JSONEmployee))
                 .andExpect(status().isNotFound())
@@ -447,7 +447,7 @@ public class Employee {
 
         int EmployeeId = 1;
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingSalary/" + EmployeeId)
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingSalary/" + EmployeeId)
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isForbidden());
@@ -469,7 +469,7 @@ public class Employee {
     @Test
     public void GettingSalaryInfoUnauthenticatedExceptionForHRTesting() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingSalary")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingSalary")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("dada", "hr123")));
 
     }
@@ -499,7 +499,7 @@ public class Employee {
     public void GettingEmployeesOfManagerForbiddenException() throws Exception {
 
         Optional<com.example.Phase12.sections.Employee> manager = employeeRepository.findById(1);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingUnderEmployees/1")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingUnderEmployees/1")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
 
@@ -531,7 +531,7 @@ public class Employee {
     @Test
     public void GettingEmployeesRecursivelyForbiddenException() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/gettingEmployeesRecursively/2")
+        mockMvc.perform(MockMvcRequestBuilders.get("/HumanResources/employees/get/gettingEmployeesRecursively/2")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("safty", "safty123")))
                 .andExpect(status().isForbidden());
 
