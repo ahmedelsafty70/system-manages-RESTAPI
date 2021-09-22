@@ -61,11 +61,7 @@ public class Vacation {
     @Test
     public void addingVacation() throws Exception {
 
-        com.example.Phase12.sections.Employee employee = employeeRepository.findById(1).orElse(null);
-
-
-
-        addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, employee); //##ASK AMIN for the employee
+        addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, 1); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommand);
 
@@ -79,11 +75,9 @@ public class Vacation {
     @Test
     public void addingVacationForbiddenException() throws Exception {
 
-        com.example.Phase12.sections.Employee employee = employeeRepository.findById(1).orElse(null);
+       // com.example.Phase12.sections.Employee employee = employeeRepository.findById(1).orElse(null);
 
-
-
-        addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, employee); //##ASK AMIN for the employee
+        addVacationCommand vacationCommand = new addVacationCommand(5, "SASA", 2021, '1'); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommand);
 
@@ -149,8 +143,8 @@ public class Vacation {
     public void addingVacationYearBeforeJoiningInvalidTesting() throws Exception {
 
 
-        Employee employee = employeeRepository.findById(1).orElse(null);
-        addVacationCommandYearBeforeJoiningException vacationCommandYearException = new addVacationCommandYearBeforeJoiningException(5, "sasa", 199, employee); //##ASK AMIN for the employee
+        //Employee employee = employeeRepository.findById(1).orElse(null);
+        addVacationCommandYearBeforeJoiningException vacationCommandYearException = new addVacationCommandYearBeforeJoiningException(5, "sasa", 199, 1); //##ASK AMIN for the employee
 
         String JSONVacation = objectMapper.writeValueAsString(vacationCommandYearException);
 

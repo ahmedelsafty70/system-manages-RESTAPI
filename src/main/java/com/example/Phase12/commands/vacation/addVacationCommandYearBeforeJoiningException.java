@@ -13,16 +13,15 @@ public class addVacationCommandYearBeforeJoiningException {
 
     private int id;
     private String employee_name;
-    private Integer year;
-    @JsonBackReference
-    private Employee employee;
+    private int currentYear;
+    private int employeeId;
 
 
-    public addVacationCommandYearBeforeJoiningException(int id, String employee_name, Integer year, Employee employee) {
+    public addVacationCommandYearBeforeJoiningException(int id, String employee_name, int currentYear, int employeeId) {
         this.id = id;
         this.employee_name = employee_name;
-        this.year = year;
-        this.employee = employee;
+        this.currentYear = currentYear;
+        this.employeeId = employeeId;
     }
 
 }

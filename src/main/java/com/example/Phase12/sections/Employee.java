@@ -1,11 +1,14 @@
 package com.example.Phase12.sections;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
+//@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 @Table(name = "employee")
 
     public class Employee {
@@ -39,7 +42,7 @@ import java.util.*;
     @Column(name = "graduationDate")
     private Date graduationDate;
 
-    @JsonIgnore
+//    @JsonIgnore
     @JsonManagedReference
     @OneToMany(mappedBy="employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Earnings> ListOfEarnings ;
@@ -58,7 +61,7 @@ import java.util.*;
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Employee> listOfEmployees;
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Vacation> vacationList;
 

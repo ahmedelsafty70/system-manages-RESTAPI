@@ -29,8 +29,6 @@ public class VacationController {
     @PostMapping(value = "addVacation",produces= MediaType.APPLICATION_JSON_VALUE)
     public addVacationDto addVacation(@RequestBody addVacationCommand vacationCommand)throws Exception{
 
-
-
         return vacationService.savingVacation(vacationCommand);
     }
 

@@ -13,15 +13,15 @@ public class addVacationDto {
     private int id;
     private String employee_name;
     private Integer currentYear;
-    private Employee employee;
+    private int employeeId;
 
 
 
-    public addVacationDto(int id, String employee_name, Integer currentYear, Employee employee) {
+    public addVacationDto(int id, String employee_name, Integer currentYear, int employeeId) {
         this.id = id;
         this.employee_name = employee_name;
         this.currentYear = currentYear;
-        this.employee = employee;
+        this.employeeId = employeeId;
     }
 
 }
